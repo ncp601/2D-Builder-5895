@@ -1,8 +1,5 @@
 package Frame;
 
-import javax.swing.*;
-import java.awt.*;
-
 public class BuilderApplication {
 	
 	public static void main(String args[]) {

@@ -1,32 +1,57 @@
 package Frame;
 
 import java.awt.*;
+import javax.swing.*;
 
-public class Grid extends Canvas{
-    
-  private int width, height;
-  final private int rows;
-  final private int cols;
+public class Grid extends JPanel{
 
-  Grid(int w, int h, int r, int c) {
-    width = w;
-    height = h;
-    rows = r;
-    cols = c;
-  }
-  
-    @Override
-    //Paints the grid onto the canvas layer
-    public void paint(Graphics g) {
-
-    // draw the rows
-    int rowHt = height / (rows);
-    for (int i = 0; i < rows; i++)
-      g.drawLine(0, i * rowHt, width, i * rowHt);
-
-    // draw the columns
-    int rowWid = width / (cols);
-    for (int i = 0; i < cols; i++)
-      g.drawLine(i * rowWid, 0, i * rowWid, height);
-  }
+	private int rowCount = 10;
+	private int columnCount = 10; 
+	private int borderWidth = 1;
+	
+	public Grid() {
+		
+		setBackground(new Color(255, 255, 255));
+        setLayout(new GridLayout(10,10));
+		
+        for(int i =  0; i < rowCount; i++){
+        	for(int j = 0; j < columnCount; j++){
+        		final JLabel label = new JLabel();
+                if (rowCount == 0) {
+                    if (columnCount == 0) {
+                        // Top left corner, draw all sides
+                        label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    }
+                    else {
+                        // Top edge, draw all sides except left edge
+                        label.setBorder(BorderFactory.createMatteBorder(borderWidth, 
+                                                                        0, 
+                                                                        borderWidth, 
+                                                                        borderWidth, 
+                                                                        Color.BLACK));
+                    }
+                }
+                else {
+                    if (columnCount == 0) {
+                        // Left-hand edge, draw all sides except top
+                        label.setBorder(BorderFactory.createMatteBorder(0, 
+                                                                        borderWidth, 
+                                                                        borderWidth, 
+                                                                        borderWidth, 
+                                                                        Color.BLACK));
+                    }
+                    else {
+                        // Neither top edge nor left edge, skip both top and left lines
+                        label.setBorder(BorderFactory.createMatteBorder(0, 
+                                                                        0, 
+                                                                        borderWidth, 
+                                                                        borderWidth, 
+                                                                        Color.BLACK));
+                    }
+                }
+                add(label);
+        	}
+        }
+        
+    }
 }
