@@ -36,21 +36,19 @@ public class TabbedPane extends MouseAdapter {
 
     //Creates the button that will add new tabs to the TabbedPane
     addTabButton = new JButton(); 
-    addTabButton.setText("+");
+    addTabButton.setText("  +  ");
     addTabButton.setOpaque (false); //
     addTabButton.setBorder (null);
-    addTabButton.setContentAreaFilled (false);
+    addTabButton.setContentAreaFilled (true);
     addTabButton.setFocusPainted (false);
     addTabButton.setFocusable (false);
     addTabButton.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
         	insertTab();
-//        	addTabButtonActionPerformed(evt);
         }
     });
     
-    //Adds the button to the TabbedPane
-//    floorTabPanel.addTab("+", addTabButton);
+    //Adds the addbutton to the TabbedPane
     insertTab();
 	}
 	
@@ -65,27 +63,29 @@ public class TabbedPane extends MouseAdapter {
 	}
 	private void insertTab(){
 		String title = "Floor " + String.valueOf (floorTabPanel.getTabCount ());
-
-		floorTabPanel.insertTab(title, null, new MainLayeredPane(), "", floorTabPanel.getTabCount() - 1 );
 	    
-	    if (tabCounter >= 0) {
+	    if (tabCounter >= 0 && tabCounter < 9) {
 	        JPanel pnl = new JPanel();
 	        pnl.setOpaque(false);
+			floorTabPanel.insertTab(title, null, new MainLayeredPane(), "", floorTabPanel.getTabCount() - 1 );
 	        pnl.add(addTabButton);
 	        floorTabPanel.setTabComponentAt(floorTabPanel.getTabCount() - 1, pnl);
 	        floorTabPanel.setSelectedIndex(floorTabPanel.getTabCount() - 2);
 	        floorTabPanel.setEnabledAt(floorTabPanel.getTabCount()-1, false);	    	
-	      }
-
-	      tabCounter++;
+		    tabCounter++;  
 	    }
+	    else if (tabCounter == 9){
+	    	removeAll();
+	    	tabCounter = floorTabPanel.getTabCount();
+	    }
+    }
 
-//	}
 	
 	//Removes all the current tabs and adds the default 
 	public void removeAll(){
-		
-		
+		for(int i = floorTabPanel.getTabCount(); i > 2  ; i--){
+			floorTabPanel.remove(i-2);
+		}
 	}
 	
 }
