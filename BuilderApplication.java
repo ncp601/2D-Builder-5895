@@ -1,8 +1,8 @@
 package Frame;
 
-import javax.swing.*;
-import java.awt.*;
-
+/**
+ * Main method of the application
+ */
 public class BuilderApplication {
 	
 	public static void main(String args[]) {
