@@ -1,32 +1,34 @@
 package Frame;
 
 import java.awt.*;
+import javax.swing.*;
 
-public class Grid extends Canvas{
-    
-  private int width, height;
-  final private int rows;
-  final private int cols;
+public class Grid extends JPanel{
 
-  Grid(int w, int h, int r, int c) {
-    width = w;
-    height = h;
-    rows = r;
-    cols = c;
-  }
-  
-    @Override
-    //Paints the grid onto the canvas layer
-    public void paint(Graphics g) {
+	private int rowCount = 20;
+	private int columnCount = 35; 
+	private int borderWidth = 1;
+	
+	public Grid() {
+		
+		setBackground(new Color(255, 255, 255));
+        setLayout(new GridLayout(rowCount,columnCount));
+		
+        for(int i =  0; i < rowCount; i++){
+        	for(int j = 0; j < columnCount; j++){
+        		final JLabel label = new JLabel();
 
-    // draw the rows
-    int rowHt = height / (rows);
-    for (int i = 0; i < rows; i++)
-      g.drawLine(0, i * rowHt, width, i * rowHt);
+                        label.setBorder(BorderFactory.createMatteBorder(borderWidth, 
+                        												borderWidth,
+                                                                        borderWidth, 
+                                                                        borderWidth, 
+                                                                        new Color(190,190,190) 
+                                                                        ));
 
-    // draw the columns
-    int rowWid = width / (cols);
-    for (int i = 0; i < cols; i++)
-      g.drawLine(i * rowWid, 0, i * rowWid, height);
-  }
+//                }
+                add(label);
+        	}
+        }
+        
+    }
 }
