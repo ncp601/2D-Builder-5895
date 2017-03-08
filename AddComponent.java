@@ -7,7 +7,8 @@ public class AddComponent implements ComponentCommands {
 	ComponentReceiver compR;
 	FloorComponent currentLabel;
 	
-	public AddComponent(FloorComponent l) {
+	public AddComponent(ComponentReceiver r, FloorComponent l) {
+		this.compR = r;
 		this.currentLabel = l;
 	}
 	
