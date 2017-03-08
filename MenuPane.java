@@ -50,6 +50,7 @@ public class MenuPane extends MouseAdapter{
     private JPanel windowsMenuPanel; 
     
     private WallComponent fillLabel;
+//    JLabel dragLabel;
     
     private ComponentReceiver compR = new ComponentReceiver();
     private ComponentManager compM = new ComponentManager();
@@ -102,7 +103,7 @@ public class MenuPane extends MouseAdapter{
         garageMenuPanel = new JPanel();
         
     	fillLabel = new WallComponent();
-        
+        fillLabel.addMouseListener(this);
       //Creates the leftMenuPanel that will hold all the components that can be dragged into a plan
         leftMenuPanel.setBackground(new Color(153, 153, 153));
         leftMenuPanel.setForeground(new Color(255, 255, 255));
@@ -422,14 +423,30 @@ public class MenuPane extends MouseAdapter{
             }
         });
 
-        wallsMenuPanel.add(fillLabel = new WallComponent());
-        wallsMenuPanel.add(fillLabel = new WallComponent());
-        wallsMenuPanel.add(fillLabel = new WallComponent());
-        wallsMenuPanel.add(fillLabel = new WallComponent());
-        wallsMenuPanel.add(fillLabel = new WallComponent());
-        
+        wallsMenuPanel.add(fillLabel);
+        fillLabel = new WallComponent();
+        fillLabel.addMouseListener(this);
+        wallsMenuPanel.add(fillLabel);
+
+        fillLabel = new WallComponent();
+        fillLabel.addMouseListener(this);
+        wallsMenuPanel.add(fillLabel);
+
+        fillLabel = new WallComponent();
+        fillLabel.addMouseListener(this);
+        wallsMenuPanel.add(fillLabel);
+
+        fillLabel = new WallComponent();
+        fillLabel.addMouseListener(this);
+        wallsMenuPanel.add(fillLabel);
+
+        fillLabel = new WallComponent();
+        fillLabel.addMouseListener(this);
+        wallsMenuPanel.add(fillLabel);
         
         leftMenuPanel.add(wallsMenuPanel, "WALLS");
+        
+
 
       //Creates the stairsMenuPanel that will hold stairs components
         stairsMenuPanel.setLayout(g);
@@ -602,6 +619,24 @@ public class MenuPane extends MouseAdapter{
     	
     }
     
+//-------------------------------------------------------------------------------------------------------------    
+    
+    @Override
+    public void mousePressed(MouseEvent evt){
+        try
+        {
+        	currentTabbedPane.mainLayeredPanel.setFC((FloorComponent)evt.getSource());
+        	currentTabbedPane.mainLayeredPanel.setBaos(baos);
+        }
+        catch (Exception ex){}
+    	
+    	
+    }
+    
+    
+
+//-------------------------------------------------------------------------------------------------------------   
+    
     //Gets the current leftMenuPanel
 	public JPanel getGUI(){
 		return leftMenuPanel;
@@ -680,61 +715,12 @@ public class MenuPane extends MouseAdapter{
     private void garageButtonActionPerformed(ActionEvent evt) {                                             
     	CardLayout cardLayout = (CardLayout) leftMenuPanel.getLayout();
     	cardLayout.show(leftMenuPanel, "GARAGE");
+    	
     } 
-		
-    @Override
-    public void mousePressed(MouseEvent me) {
-    	clickedPanel = (JPanel) leftMenuPanel.getComponentAt(me.getPoint());
-    	Component[] components = clickedPanel.getComponents();
-    	
-    	if (components.length == 0) {
-            return;
-        }
-        // if we click on jpanel that holds a jlabel
-        if (components[0] instanceof JLabel) {
-        	
-        	//create a new instance of the component
-        	try{
-        		deepCopy((FloorComponent)me.getSource());
-        		
-        	} 
-        	catch(Exception ex){}
-        	
-        	bins = new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream oins = new ObjectInputStream(bins);
-            JLabel dragLabel = (JLabel)oins.readObject();
-        	
-        	dragLabelWidthDiv2 = dragLabel.getWidth() / 2;
-            dragLabelHeightDiv2 = dragLabel.getHeight() / 2;
+    
+    
+    
 
-            int x = me.getPoint().x - dragLabelWidthDiv2;
-            int y = me.getPoint().y - dragLabelHeightDiv2;
-            dragLabel.setLocation(x, y);
-            currentTabbedPane.add(dragLabel);
-        	
-        }
-    }
-    
-    @Override
-    public void mouseDragged(MouseEvent me) {
-    	if (dragLabel == null) {
-            return;
-        }
-        int x = me.getPoint().x - dragLabelWidthDiv2;
-        int y = me.getPoint().y - dragLabelHeightDiv2;
-        dragLabel.setLocation(x, y);
-    }
-    
-    @Override
-    public void mouseReleased(MouseEvent me) {
-    	
-    }
-    
-    public void deepCopy(FloorComponent c) throws Exception { 
-    	baos = new ByteArrayOutputStream();
-    	ObjectOutputStream oos = new ObjectOutputStream(baos);
-    	oos.writeObject(c);
-    	oos.close();
-    }
-    
+		
+
 }

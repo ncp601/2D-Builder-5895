@@ -1,22 +1,29 @@
 package Frame;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.swing.*;
 
-public class MainLayeredPane extends JLayeredPane {
+public class MainLayeredPane extends JLayeredPane implements MouseListener {
 
     private JPanel glassPanel;
     private Grid gridPanel;
 	
 	public MainLayeredPane(){
-
+		addMouseListener(this);
 	    setOpaque(true);
 
 	  //------------------------------------------------------------------------------
 	        
 	  //Creates the glassPanel layer that will lay on top of the canvas and act as the drag layer
 	    glassPanel = new JPanel();
+	    
 	    glassPanel.setBackground(new Color(0, 0, 0, 0));
 	    glassPanel.setOpaque(false);
 
@@ -64,4 +71,79 @@ public class MainLayeredPane extends JLayeredPane {
 	public JPanel getGlassPanel(){
 		return glassPanel;
 	}
+	
+
+    private ByteArrayOutputStream baos;
+    private ByteArrayInputStream bins;
+    FloorComponent copyofdragLabel;
+
+	public void setFC(FloorComponent c){
+		copyofdragLabel = c;
+		
+	}
+	public void setBaos(ByteArrayOutputStream baos){
+		this.baos = baos;
+	}
+
+
+	@Override
+    public void mousePressed(MouseEvent e){
+		try 
+		{
+//			if(copyofdragLabel != null){
+			deepCopy(copyofdragLabel);
+			pasteLabel(e.getX(),e.getY());
+        	System.out.println("MOUSE_CLICKED");
+//			}
+		}
+        catch (Exception ex){}
+	};
+
+
+    public void pasteLabel(int x, int y)throws Exception
+    {
+        {
+            bins = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream oins = new ObjectInputStream(bins);
+            FloorComponent obj = (FloorComponent) oins.readObject();
+        	System.out.println("MOUSE_CLIC4KED");
+            glassPanel.add(obj);
+        	System.out.println("MOUSE_CLICKE5D");
+            obj.setBounds(x,y,obj.getWidth(),obj.getHeight());
+            repaint();
+        }
+    }
+    
+    public void deepCopy(FloorComponent label)throws Exception
+    {	
+        System.out.println("DEEP_COPY");
+        baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(label);
+        oos.close();
+    }
+
+	@Override
+    public void mouseEntered(MouseEvent e){};
+
+//	@Override
+//    public void mousePressed(MouseEvent e){};
+
+	@Override
+    public void mouseExited(MouseEvent e){};
+
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+
+	@Override
+    public void mouseClicked(MouseEvent e){};
+    
+	
+	
 }
+
+
+
+
+
+

@@ -2,6 +2,9 @@ package Frame;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
+
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 
@@ -13,8 +16,8 @@ public class TabbedPane {
 
 	// Variables declaration                  
     private JButton addTabButton;
-    private JTabbedPane floorTabPanel;
-    private MainLayeredPane mainLayeredPanel;
+    protected JTabbedPane floorTabPanel;
+    public MainLayeredPane mainLayeredPanel;
     private int tabCounter = 1;
 	private JButton removeButton;
     
@@ -22,7 +25,7 @@ public class TabbedPane {
 		
 	//Creates floorTabPanel
     floorTabPanel = new JTabbedPane();
-    floorTabPanel.setBackground(new Color(255, 255, 255));
+    floorTabPanel.setBackground(new Color(155, 155, 155));
     floorTabPanel.setFocusable(false);
 
   //------------------------------------------------------------------------------
@@ -33,6 +36,9 @@ public class TabbedPane {
   //Adds the mainLayeredPanel to the floorTabPanel
     removeButton = new TabButton();
 	mainLayeredPanel.add(removeButton);
+	
+	mainLayeredPanel.addMouseListener(mainLayeredPanel);
+	
     floorTabPanel.addTab("Floor 1", mainLayeredPanel);
 
   //------------------------------------------------------------------------------
@@ -73,6 +79,8 @@ public class TabbedPane {
 	    }
 	   
     }
+
+    
 	
 	//Removes all the current tabs and adds the default 
 	public void removeAll(){
@@ -84,9 +92,6 @@ public class TabbedPane {
 		insertTab();
 	}
 	
-	public void add(JLabel c){
-		mainLayeredPanel.add(c, mainLayeredPanel.getGlassPanel());
-	}
 	
 	private class TabButton extends JButton implements ActionListener {
 		
@@ -109,6 +114,7 @@ public class TabbedPane {
 	        //Close the proper tab by clicking the button
 	        addActionListener(this);
 	    }
+	    
 
 	    public void actionPerformed(ActionEvent e) {
 	        int i = floorTabPanel.indexOfTabComponent(floorTabPanel);
@@ -158,4 +164,10 @@ public class TabbedPane {
 	        }
 	    }
 	};
+	
+	
+	
+
+
+
 }
