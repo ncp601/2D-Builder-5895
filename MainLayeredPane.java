@@ -15,6 +15,10 @@ public class MainLayeredPane extends JLayeredPane implements MouseListener {
     private JPanel glassPanel;
     private Grid gridPanel;
 	
+    private ByteArrayOutputStream baos;
+    private ByteArrayInputStream bins;
+    FloorComponent copyofdragLabel;
+    
 	public MainLayeredPane(){
 		addMouseListener(this);
 	    setOpaque(true);
@@ -71,11 +75,6 @@ public class MainLayeredPane extends JLayeredPane implements MouseListener {
 	public JPanel getGlassPanel(){
 		return glassPanel;
 	}
-	
-
-    private ByteArrayOutputStream baos;
-    private ByteArrayInputStream bins;
-    FloorComponent copyofdragLabel;
 
 	public void setFC(FloorComponent c){
 		copyofdragLabel = c;
@@ -85,16 +84,13 @@ public class MainLayeredPane extends JLayeredPane implements MouseListener {
 		this.baos = baos;
 	}
 
-
 	@Override
     public void mousePressed(MouseEvent e){
 		try 
 		{
-//			if(copyofdragLabel != null){
 			deepCopy(copyofdragLabel);
 			pasteLabel(e.getX(),e.getY());
         	System.out.println("MOUSE_CLICKED");
-//			}
 		}
         catch (Exception ex){}
 	};

@@ -16,10 +16,7 @@ public class WallComponent extends FloorComponent {
 	private boolean isStackable = false;
 	
 	public WallComponent(){
-		
 		ImageIcon image = new ImageIcon("quality.png");
 		setIcon(image);
-		
 	}
-	
 }

@@ -50,18 +50,18 @@ public class MenuPane extends MouseAdapter{
     private JPanel windowsMenuPanel; 
     
     private WallComponent fillLabel;
-//    JLabel dragLabel;
     
-    private ComponentReceiver compR = new ComponentReceiver();
-    private ComponentManager compM = new ComponentManager();
+//    private ComponentReceiver compR = new ComponentReceiver();
+//    private ComponentManager compM = new ComponentManager();
     
     private ByteArrayOutputStream baos;
-    private ByteArrayInputStream bins;
+//    private ByteArrayInputStream bins;
     
-    private FloorComponent dragLabel = null;
-    private int dragLabelWidthDiv2;
-    private int dragLabelHeightDiv2;
-    private JPanel clickedPanel = null;
+//    private FloorComponent dragLabel = null;
+//    private int dragLabelWidthDiv2;
+//    private int dragLabelHeightDiv2;
+//    private JPanel clickedPanel = null;
+//    private boolean mouseClicked;
     
     public MenuPane(TabbedPane t) {
     
@@ -125,6 +125,16 @@ public class MenuPane extends MouseAdapter{
                 wallsButtonActionPerformed(evt);
             }
         });
+        wallsButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	wallsButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	wallsButton.setForeground(Color.BLACK);
+            }               
+        });
 
       //Creates the stairsButton button  
         stairsButton.setText("Stairs");
@@ -138,6 +148,17 @@ public class MenuPane extends MouseAdapter{
             public void actionPerformed(ActionEvent evt) {
                 stairsButtonActionPerformed(evt);
             }
+        });
+        
+        stairsButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	stairsButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	stairsButton.setForeground(Color.BLACK);
+            }               
         });
 
       //Creates the elevatorButton button 
@@ -153,6 +174,17 @@ public class MenuPane extends MouseAdapter{
                 elevatorButtonActionPerformed(evt);
             }
         });
+        
+        elevatorButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	elevatorButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	elevatorButton.setForeground(Color.BLACK);
+            }               
+        });
 
       //Creates the doorButton button   
         doorButton.setText("Doors");
@@ -167,7 +199,18 @@ public class MenuPane extends MouseAdapter{
                 doorButtonActionPerformed(evt);
             }
         });
-
+        
+        doorButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	doorButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	doorButton.setForeground(Color.BLACK);
+            }               
+        });
+        
       //Creates the windowsButton button
         windowsButton.setText("Windows");
         windowsButton.setBorder(null);
@@ -181,7 +224,18 @@ public class MenuPane extends MouseAdapter{
                 windowsButtonActionPerformed(evt);
             }
         });
-
+        
+        windowsButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	windowsButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	windowsButton.setForeground(Color.BLACK);
+            }               
+        });
+        
       //Creates the second header on the main menu
         furnitureLabel.setText("Furniture");
 
@@ -198,7 +252,18 @@ public class MenuPane extends MouseAdapter{
                 flooringButtonActionPerformed(evt);
             }
         });
-
+        
+        flooringButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	flooringButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	flooringButton.setForeground(Color.BLACK);
+            }               
+        });
+        
       //Creates the dinningRoomButton button 
         dinningRoomButton.setText("Dinning Room");
         dinningRoomButton.setBorder(null);
@@ -212,7 +277,18 @@ public class MenuPane extends MouseAdapter{
                 dinningRoomButtonActionPerformed(evt);
             }
         });
-
+        
+        dinningRoomButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	dinningRoomButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	dinningRoomButton.setForeground(Color.BLACK);
+            }               
+        });
+        
       //Creates the kitchenButton button
         kitchenButton.setText("Kitchen");
         kitchenButton.setBorder(null);
@@ -225,6 +301,17 @@ public class MenuPane extends MouseAdapter{
             public void actionPerformed(ActionEvent evt) {
                 kitchenButtonActionPerformed(evt);
             }
+        });
+        
+        kitchenButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	kitchenButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	kitchenButton.setForeground(Color.BLACK);
+            }               
         });
         
       //Creates the officeButton button
@@ -241,6 +328,17 @@ public class MenuPane extends MouseAdapter{
             }
         });
         
+        officeButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                officeButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                officeButton.setForeground(Color.BLACK);
+            }               
+        });
+        
       //Creates the bedroomButton button  
         bedroomButton.setText("Bedroom");
         bedroomButton.setBorder(null);
@@ -254,7 +352,18 @@ public class MenuPane extends MouseAdapter{
                 bedroomButtonActionPerformed(evt);
             }
         });
-
+        
+        bedroomButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	bedroomButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	bedroomButton.setForeground(Color.BLACK);
+            }               
+        });
+        
       //Creates the bathroomButton button  
         bathroomButton.setText("Bathroom");
         bathroomButton.setBorder(null);
@@ -268,7 +377,18 @@ public class MenuPane extends MouseAdapter{
                 bathroomButtonActionPerformed(evt);
             }
         });
-
+        
+        bathroomButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	bathroomButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	bathroomButton.setForeground(Color.BLACK);
+            }               
+        });
+        
       //Creates the laundryButton button
         laundryButton.setText("Laundry");
         laundryButton.setBorder(null);
@@ -282,7 +402,18 @@ public class MenuPane extends MouseAdapter{
                 laundryButtonActionPerformed(evt);
             }
         });
-
+        
+        laundryButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	laundryButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	laundryButton.setForeground(Color.BLACK);
+            }               
+        });
+        
       //Creates the garageButton button 
         garageButton.setText("Garage");
         garageButton.setBorder(null);
@@ -296,7 +427,18 @@ public class MenuPane extends MouseAdapter{
                 garageButtonActionPerformed(evt);
             }
         });
-
+        
+        garageButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	garageButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	garageButton.setForeground(Color.BLACK);
+            }               
+        });
+        
       //Creates the livingRoomButton button
         livingRoomButton.setText("Living Room");
         livingRoomButton.setBorder(null);
@@ -310,7 +452,18 @@ public class MenuPane extends MouseAdapter{
                 livingRoomButtonActionPerformed(evt);
             }
         });
-           
+        
+        livingRoomButton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	livingRoomButton.setForeground(Color.BLUE);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	livingRoomButton.setForeground(Color.BLACK);
+            }               
+        });
+        
       //------------------------------------------------------------------------------
         
       //Creates the layouts for the mainMenuPanel
@@ -417,8 +570,8 @@ public class MenuPane extends MouseAdapter{
                 
       //Creates the backButton that will redirect users from the various component tabs back to the main menu
         wallsMenuPanel.add(backButton = new BackButton());
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
@@ -453,8 +606,8 @@ public class MenuPane extends MouseAdapter{
         
       //Creates the backButton that will redirect users from the various component tabs back to the main menu
         stairsMenuPanel.add(backButton = new BackButton());
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
@@ -466,8 +619,8 @@ public class MenuPane extends MouseAdapter{
         
       //Creates the backButton that will redirect users from the various component tabs back to the main menu
         elevatorMenuPanel.add(backButton = new BackButton());
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
@@ -479,8 +632,8 @@ public class MenuPane extends MouseAdapter{
         doorsMenuPanel.setLayout(g);
       //Creates the backButton that will redirect users from the various component tabs back to the main menu
         doorsMenuPanel.add(backButton = new BackButton());
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
@@ -492,8 +645,8 @@ public class MenuPane extends MouseAdapter{
         
       //Creates the backButton that will redirect users from the various component tabs back to the main menu
         flooringMenuPanel.add(backButton = new BackButton());
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
@@ -505,8 +658,8 @@ public class MenuPane extends MouseAdapter{
         
       //Creates the backButton that will redirect users from the various component tabs back to the main menu
         windowsMenuPanel.add(backButton = new BackButton());
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
@@ -518,8 +671,8 @@ public class MenuPane extends MouseAdapter{
         
       //Creates the backButton that will redirect users from the various component tabs back to the main menu
         livingRoomMenuPanel.add(backButton = new BackButton());
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
@@ -531,8 +684,8 @@ public class MenuPane extends MouseAdapter{
         
         //Creates the backButton that will redirect users from the various component tabs back to the main menu
         dinningRoomMenuPanel.add(backButton = new BackButton());
-          backButton.addActionListener(new java.awt.event.ActionListener() {
-              public void actionPerformed(java.awt.event.ActionEvent evt) {
+          backButton.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent evt) {
                   backButtonActionPerformed(evt);
               }
           });
@@ -544,8 +697,8 @@ public class MenuPane extends MouseAdapter{
         
         //Creates the backButton that will redirect users from the various component tabs back to the main menu
         bedroomMenuPanel.add(backButton = new BackButton());
-          backButton.addActionListener(new java.awt.event.ActionListener() {
-              public void actionPerformed(java.awt.event.ActionEvent evt) {
+          backButton.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent evt) {
                   backButtonActionPerformed(evt);
               }
           });
@@ -557,8 +710,8 @@ public class MenuPane extends MouseAdapter{
         
         //Creates the backButton that will redirect users from the various component tabs back to the main menu
         kitchenMenuPanel.add(backButton = new BackButton());
-          backButton.addActionListener(new java.awt.event.ActionListener() {
-              public void actionPerformed(java.awt.event.ActionEvent evt) {
+          backButton.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent evt) {
                   backButtonActionPerformed(evt);
               }
           });
@@ -570,8 +723,8 @@ public class MenuPane extends MouseAdapter{
         
         //Creates the backButton that will redirect users from the various component tabs back to the main menu
         officeMenuPanel.add(backButton = new BackButton());
-          backButton.addActionListener(new java.awt.event.ActionListener() {
-              public void actionPerformed(java.awt.event.ActionEvent evt) {
+          backButton.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent evt) {
                   backButtonActionPerformed(evt);
               }
           });
@@ -583,8 +736,8 @@ public class MenuPane extends MouseAdapter{
         
         //Creates the backButton that will redirect users from the various component tabs back to the main menu
         bathroomMenuPanel.add(backButton = new BackButton());
-          backButton.addActionListener(new java.awt.event.ActionListener() {
-              public void actionPerformed(java.awt.event.ActionEvent evt) {
+          backButton.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent evt) {
                   backButtonActionPerformed(evt);
               }
           });
@@ -596,8 +749,8 @@ public class MenuPane extends MouseAdapter{
         
         //Creates the backButton that will redirect users from the various component tabs back to the main menu
         laundryMenuPanel.add(backButton = new BackButton());
-          backButton.addActionListener(new java.awt.event.ActionListener() {
-              public void actionPerformed(java.awt.event.ActionEvent evt) {
+          backButton.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent evt) {
                   backButtonActionPerformed(evt);
               }
           });
@@ -609,8 +762,8 @@ public class MenuPane extends MouseAdapter{
         
         //Creates the backButton that will redirect users from the various component tabs back to the main menu
         garageMenuPanel.add(backButton = new BackButton());
-          backButton.addActionListener(new java.awt.event.ActionListener() {
-              public void actionPerformed(java.awt.event.ActionEvent evt) {
+          backButton.addActionListener(new ActionListener() {
+              public void actionPerformed(ActionEvent evt) {
                   backButtonActionPerformed(evt);
               }
           });
@@ -633,8 +786,6 @@ public class MenuPane extends MouseAdapter{
     	
     }
     
-    
-
 //-------------------------------------------------------------------------------------------------------------   
     
     //Gets the current leftMenuPanel
@@ -642,7 +793,7 @@ public class MenuPane extends MouseAdapter{
 		return leftMenuPanel;
 	}
     
-	private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+	private void backButtonActionPerformed(ActionEvent evt) {                                           
 		CardLayout cardLayout = (CardLayout) leftMenuPanel.getLayout();
     	cardLayout.show(leftMenuPanel, "MAIN");
     } 
@@ -717,10 +868,5 @@ public class MenuPane extends MouseAdapter{
     	cardLayout.show(leftMenuPanel, "GARAGE");
     	
     } 
-    
-    
-    
-
-		
-
+	
 }
