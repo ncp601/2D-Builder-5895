@@ -14,12 +14,15 @@ public class MenuButton extends JButton{
 	private static final long serialVersionUID = 1L;
 
 	public BackButton() {
-	    setBorder(null);
-	    setBorderPainted(false);
-	    setContentAreaFilled(false);
-	    setDefaultCapable(false);
-	    setFocusPainted(false);
+        setBorder(null);
+        setBorderPainted(false);
+        setContentAreaFilled(false);
+        setDefaultCapable(false);
+        setFocusPainted(false);
+	setHorizontalAlignment(SwingConstants.LEFT);
 	    
+		
+		
 	    addMouseListener(new MouseAdapter(){
             @Override
             public void mouseEntered(MouseEvent e) {
