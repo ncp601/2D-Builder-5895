@@ -114,126 +114,42 @@ public class MenuPane extends MouseAdapter{
         
       //Creates the wallsButton button
         wallsButton.setText("Walls");
-        wallsButton.setBorder(null);
-        wallsButton.setBorderPainted(false);
-        wallsButton.setContentAreaFilled(false);
-        wallsButton.setDefaultCapable(false);
-        wallsButton.setFocusPainted(false);
-        wallsButton.setHorizontalAlignment(SwingConstants.LEFT);
         wallsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 wallsButtonActionPerformed(evt);
             }
         });
-        wallsButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	wallsButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	wallsButton.setForeground(Color.BLACK);
-            }               
-        });
 
       //Creates the stairsButton button  
         stairsButton.setText("Stairs");
-        stairsButton.setBorder(null);
-        stairsButton.setBorderPainted(false);
-        stairsButton.setContentAreaFilled(false);
-        stairsButton.setDefaultCapable(false);
-        stairsButton.setFocusPainted(false);
-        stairsButton.setHorizontalAlignment(SwingConstants.LEFT);
         stairsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 stairsButtonActionPerformed(evt);
             }
         });
-        
-        stairsButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	stairsButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	stairsButton.setForeground(Color.BLACK);
-            }               
-        });
-
+	    
       //Creates the elevatorButton button 
         elevatorButton.setText("Elevators");
-        elevatorButton.setBorder(null);
-        elevatorButton.setBorderPainted(false);
-        elevatorButton.setContentAreaFilled(false);
-        elevatorButton.setDefaultCapable(false);
-        elevatorButton.setFocusPainted(false);
-        elevatorButton.setHorizontalAlignment(SwingConstants.LEFT);
         elevatorButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 elevatorButtonActionPerformed(evt);
             }
         });
-        
-        elevatorButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	elevatorButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	elevatorButton.setForeground(Color.BLACK);
-            }               
-        });
 
       //Creates the doorButton button   
         doorButton.setText("Doors");
-        doorButton.setBorder(null);
-        doorButton.setBorderPainted(false);
-        doorButton.setContentAreaFilled(false);
-        doorButton.setDefaultCapable(false);
-        doorButton.setFocusPainted(false);
-        doorButton.setHorizontalAlignment(SwingConstants.LEFT);
         doorButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 doorButtonActionPerformed(evt);
             }
         });
         
-        doorButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	doorButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	doorButton.setForeground(Color.BLACK);
-            }               
-        });
-        
       //Creates the windowsButton button
         windowsButton.setText("Windows");
-        windowsButton.setBorder(null);
-        windowsButton.setBorderPainted(false);
-        windowsButton.setContentAreaFilled(false);
-        windowsButton.setDefaultCapable(false);
-        windowsButton.setFocusPainted(false);
-        windowsButton.setHorizontalAlignment(SwingConstants.LEFT);
         windowsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 windowsButtonActionPerformed(evt);
             }
-        });
-        
-        windowsButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	windowsButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	windowsButton.setForeground(Color.BLACK);
-            }               
         });
         
       //Creates the second header on the main menu
@@ -241,202 +157,66 @@ public class MenuPane extends MouseAdapter{
 
       //Creates the flooringButton button
         flooringButton.setText("Flooring");
-        flooringButton.setBorder(null);
-        flooringButton.setBorderPainted(false);
-        flooringButton.setContentAreaFilled(false);
-        flooringButton.setDefaultCapable(false);
-        flooringButton.setFocusPainted(false);
-        flooringButton.setHorizontalAlignment(SwingConstants.LEFT);
         flooringButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 flooringButtonActionPerformed(evt);
             }
         });
         
-        flooringButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	flooringButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	flooringButton.setForeground(Color.BLACK);
-            }               
-        });
-        
       //Creates the dinningRoomButton button 
         dinningRoomButton.setText("Dinning Room");
-        dinningRoomButton.setBorder(null);
-        dinningRoomButton.setBorderPainted(false);
-        dinningRoomButton.setContentAreaFilled(false);
-        dinningRoomButton.setDefaultCapable(false);
-        dinningRoomButton.setFocusPainted(false);
-        dinningRoomButton.setHorizontalAlignment(SwingConstants.LEFT);
         dinningRoomButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 dinningRoomButtonActionPerformed(evt);
             }
         });
         
-        dinningRoomButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	dinningRoomButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	dinningRoomButton.setForeground(Color.BLACK);
-            }               
-        });
-        
       //Creates the kitchenButton button
         kitchenButton.setText("Kitchen");
-        kitchenButton.setBorder(null);
-        kitchenButton.setBorderPainted(false);
-        kitchenButton.setContentAreaFilled(false);
-        kitchenButton.setDefaultCapable(false);
-        kitchenButton.setFocusPainted(false);
-        kitchenButton.setHorizontalAlignment(SwingConstants.LEFT);
         kitchenButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 kitchenButtonActionPerformed(evt);
             }
         });
         
-        kitchenButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	kitchenButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	kitchenButton.setForeground(Color.BLACK);
-            }               
-        });
-        
       //Creates the officeButton button
         officeButton.setText("Office");
-        officeButton.setBorder(null);
-        officeButton.setBorderPainted(false);
-        officeButton.setContentAreaFilled(false);
-        officeButton.setDefaultCapable(false);
-        officeButton.setFocusPainted(false);
-        officeButton.setHorizontalAlignment(SwingConstants.LEFT);
         officeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 officeButtonActionPerformed(evt);
             }
         });
         
-        officeButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                officeButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-                officeButton.setForeground(Color.BLACK);
-            }               
-        });
-        
       //Creates the bedroomButton button  
         bedroomButton.setText("Bedroom");
-        bedroomButton.setBorder(null);
-        bedroomButton.setBorderPainted(false);
-        bedroomButton.setContentAreaFilled(false);
-        bedroomButton.setDefaultCapable(false);
-        bedroomButton.setFocusPainted(false);
-        bedroomButton.setHorizontalAlignment(SwingConstants.LEFT);
         bedroomButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 bedroomButtonActionPerformed(evt);
             }
         });
         
-        bedroomButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	bedroomButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	bedroomButton.setForeground(Color.BLACK);
-            }               
-        });
-        
       //Creates the bathroomButton button  
         bathroomButton.setText("Bathroom");
-        bathroomButton.setBorder(null);
-        bathroomButton.setBorderPainted(false);
-        bathroomButton.setContentAreaFilled(false);
-        bathroomButton.setDefaultCapable(false);
-        bathroomButton.setFocusPainted(false);
-        bathroomButton.setHorizontalAlignment(SwingConstants.LEFT);
         bathroomButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 bathroomButtonActionPerformed(evt);
             }
         });
         
-        bathroomButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	bathroomButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	bathroomButton.setForeground(Color.BLACK);
-            }               
-        });
-        
       //Creates the laundryButton button
         laundryButton.setText("Laundry");
-        laundryButton.setBorder(null);
-        laundryButton.setBorderPainted(false);
-        laundryButton.setContentAreaFilled(false);
-        laundryButton.setDefaultCapable(false);
-        laundryButton.setFocusPainted(false);
-        laundryButton.setHorizontalAlignment(SwingConstants.LEFT);
         laundryButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 laundryButtonActionPerformed(evt);
             }
         });
         
-        laundryButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	laundryButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	laundryButton.setForeground(Color.BLACK);
-            }               
-        });
-        
       //Creates the garageButton button 
         garageButton.setText("Garage");
-        garageButton.setBorder(null);
-        garageButton.setBorderPainted(false);
-        garageButton.setContentAreaFilled(false);
-        garageButton.setDefaultCapable(false);
-        garageButton.setFocusPainted(false);
-        garageButton.setHorizontalAlignment(SwingConstants.LEFT);
         garageButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 garageButtonActionPerformed(evt);
             }
-        });
-        
-        garageButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	garageButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	garageButton.setForeground(Color.BLACK);
-            }               
         });
         
       //Creates the livingRoomButton button
