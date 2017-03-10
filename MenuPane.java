@@ -15,38 +15,38 @@ public class MenuPane extends MouseAdapter{
 	
 	private TabbedPane currentTabbedPane;
 	private BackButton backButton;
-	private JButton bathroomButton;
+	private MenuButton bathroomButton;
     private JPanel bathroomMenuPanel;
-    private JButton bedroomButton;
+    private MenuButton bedroomButton;
     private JPanel bedroomMenuPanel;
-    private JButton dinningRoomButton;
+    private MenuButton dinningRoomButton;
     private JPanel dinningRoomMenuPanel;
-    private JButton doorButton;
+    private MenuButton doorButton;
     private JPanel doorsMenuPanel;
-    private JButton elevatorButton;
+    private MenuButton elevatorButton;
     private JPanel elevatorMenuPanel;
-    private JButton flooringButton;
+    private MenuButton flooringButton;
     private JPanel flooringMenuPanel;
     private JLabel furnitureLabel;
-    private JButton garageButton;
+    private MenuButton garageButton;
     private JPanel garageMenuPanel;
-    private JButton kitchenButton;
+    private MenuButton kitchenButton;
     private JPanel kitchenMenuPanel;
-    private JButton laundryButton;
+    private MenuButton laundryButton;
     private JPanel laundryMenuPanel;
     private JPanel leftMenuPanel;
-    private JButton livingRoomButton;
+    private MenuButton livingRoomButton;
     private JPanel livingRoomMenuPanel;
     private JPanel mainMenuPanel;
     private JSeparator menuSeparator;
-    private JButton officeButton;
+    private MenuButton officeButton;
     private JPanel officeMenuPanel;
-    private JButton stairsButton;
+    private MenuButton stairsButton;
     private JPanel stairsMenuPanel;
     private JLabel structureLabel;
-    private JButton wallsButton;
+    private MenuButton wallsButton;
     private JPanel wallsMenuPanel;
-    private JButton windowsButton;
+    private MenuButton windowsButton;
     private JPanel windowsMenuPanel; 
     
     private WallComponent fillLabel;
@@ -71,22 +71,22 @@ public class MenuPane extends MouseAdapter{
     	leftMenuPanel = new JPanel();
         mainMenuPanel = new JPanel();
         structureLabel = new JLabel();
-        wallsButton = new JButton();
-        stairsButton = new JButton();
-        elevatorButton = new JButton();
-        doorButton = new JButton();
-        windowsButton = new JButton();
+        wallsButton = new MenuButton();
+        stairsButton = new MenuButton();
+        elevatorButton = new MenuButton();
+        doorButton = new MenuButton();
+        windowsButton = new MenuButton();
         menuSeparator = new JSeparator();
         furnitureLabel = new JLabel();
-        flooringButton = new JButton();
-        dinningRoomButton = new JButton();
-        kitchenButton = new JButton();
-        officeButton = new JButton();
-        bedroomButton = new JButton();
-        bathroomButton = new JButton();
-        laundryButton = new JButton();
-        garageButton = new JButton();
-        livingRoomButton = new JButton();
+        flooringButton = new MenuButton();
+        dinningRoomButton = new MenuButton();
+        kitchenButton = new MenuButton();
+        officeButton = new MenuButton();
+        bedroomButton = new MenuButton();
+        bathroomButton = new MenuButton();
+        laundryButton = new MenuButton();
+        garageButton = new MenuButton();
+        livingRoomButton = new MenuButton();
         wallsMenuPanel = new JPanel();
         stairsMenuPanel = new JPanel();
         elevatorMenuPanel = new JPanel();
@@ -441,27 +441,10 @@ public class MenuPane extends MouseAdapter{
         
       //Creates the livingRoomButton button
         livingRoomButton.setText("Living Room");
-        livingRoomButton.setBorder(null);
-        livingRoomButton.setBorderPainted(false);
-        livingRoomButton.setContentAreaFilled(false);
-        livingRoomButton.setDefaultCapable(false);
-        livingRoomButton.setFocusPainted(false);
-        livingRoomButton.setHorizontalAlignment(SwingConstants.LEFT);
         livingRoomButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 livingRoomButtonActionPerformed(evt);
             }
-        });
-        
-        livingRoomButton.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            	livingRoomButton.setForeground(Color.BLUE);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            	livingRoomButton.setForeground(Color.BLACK);
-            }               
         });
         
       //------------------------------------------------------------------------------
