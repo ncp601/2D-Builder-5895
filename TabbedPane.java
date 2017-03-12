@@ -20,7 +20,7 @@ public class TabbedPane {
     public MainLayeredPane mainLayeredPanel;
     private int tabCounter = 1;
 	private JButton removeButton;
-    
+	
 	public TabbedPane() {
 		
 	//Creates floorTabPanel
@@ -36,8 +36,6 @@ public class TabbedPane {
   //Adds the mainLayeredPanel to the floorTabPanel
     removeButton = new TabButton();
 	mainLayeredPanel.add(removeButton);
-	
-	mainLayeredPanel.addMouseListener(mainLayeredPanel);
 	
     floorTabPanel.addTab("Floor 1", mainLayeredPanel);
 

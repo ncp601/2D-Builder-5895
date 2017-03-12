@@ -5,6 +5,11 @@ import javax.swing.*;
 
 public class Grid extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int rowCount = 20;
 	private int columnCount = 35; 
 	private int borderWidth = 1;

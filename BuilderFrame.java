@@ -14,14 +14,18 @@ public class BuilderFrame extends JFrame {
 	
 	// Variables declaration                  
     private JPanel contentPanel;
+    private JLayeredPane innerLayerPanel;
+    private JPanel innerContentPanel;
+    private JPanel dragLayer;
     private JPanel rootPanel;
     
     private JPanel leftMenuHeaderPanel;
     private JLabel overallHeaderLabel;
-	
+    
     TabbedPane tabbedPane = new TabbedPane();
     MenuPane menuPane = new MenuPane(tabbedPane);
     ToolBarPane toolbarPane = new ToolBarPane(tabbedPane);
+    ComponentMover compMover = new ComponentMover(tabbedPane, menuPane);
     
     public BuilderFrame() {
         initComponents();
@@ -31,6 +35,9 @@ public class BuilderFrame extends JFrame {
 
         rootPanel = new JPanel();
         contentPanel = new JPanel();
+        innerContentPanel = new JPanel();
+        dragLayer = new JPanel();
+        innerLayerPanel = new JLayeredPane();
 
         leftMenuHeaderPanel = new JPanel();
         overallHeaderLabel = new JLabel();
@@ -54,6 +61,24 @@ public class BuilderFrame extends JFrame {
 
       //------------------------------------------------------------------------------
         
+        //Creates inner content panel
+        innerContentPanel.setBackground(new Color(0, 0, 0));
+        innerContentPanel.setOpaque(false);
+        
+      //------------------------------------------------------------------------------
+        
+        //Creates dragLayer
+        dragLayer.setBackground(new Color(0, 0, 0));
+        dragLayer.setOpaque(false);
+        
+      //------------------------------------------------------------------------------
+        
+        //Creates the innerLayerPanel 
+        innerLayerPanel.setBackground(new Color(0, 0, 0));
+        innerLayerPanel.setOpaque(false);
+        
+      //------------------------------------------------------------------------------  
+        
       //Creates the leftMenuHeaderPanel
         leftMenuHeaderPanel.setBackground(new Color(0, 0, 0));
         leftMenuHeaderPanel.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
@@ -67,7 +92,7 @@ public class BuilderFrame extends JFrame {
         overallHeaderLabel.setText("Building Parts");
 
       //------------------------------------------------------------------------------
-        
+	    
       //Creates layout for the leftMenuHeaderPanel
         GroupLayout leftMenuHeaderPanelLayout = new GroupLayout(leftMenuHeaderPanel);
         leftMenuHeaderPanel.setLayout(leftMenuHeaderPanelLayout);
@@ -146,6 +171,10 @@ public class BuilderFrame extends JFrame {
         );
 
         pack();
-    }// </editor-fold>                                                                       
+    }
+    
+    public JPanel getContentPanel(){
+    	return contentPanel;
+    }
                  
 }
