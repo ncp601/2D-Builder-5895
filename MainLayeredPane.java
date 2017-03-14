@@ -34,7 +34,7 @@ public class MainLayeredPane extends JLayeredPane /*implements MouseListener, Mo
 	  //Creates the glassPanel layer that will lay on top of the canvas and act as the drag layer
 	    glassPanel = new JPanel();
 	    
-	    glassPanel.setBackground(new Color(0, 0, 0));
+	    glassPanel.setBackground(new Color(0, 0, 0, 0));
 	    glassPanel.setOpaque(false);
 
 	  //------------------------------------------------------------------------------

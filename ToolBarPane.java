@@ -25,14 +25,15 @@ public class ToolBarPane {
     private ToolBarCommands savePlan;
     
     private TabbedPane currentTabbedPane;
+    private UIPanel innerContentPane;
     
     //tbM.doCurrentCommand(tbR, newPlan);
     //tbM.doCurrentCommand(tbR, loadPlan);
     //tbM.doCurrentCommand(tbR, savePlan);
     
-	public ToolBarPane(TabbedPane tabbedPane){
+	public ToolBarPane(UIPanel innerPane){
 	    
-		this.currentTabbedPane = tabbedPane;
+		this.innerContentPane = innerPane;
 		
 		toolbarPanel = new JPanel();
         topToolBar = new JToolBar();
@@ -102,11 +103,18 @@ public class ToolBarPane {
 	        toolbarPanel.setLayout(toolbarPanelLayout);
 	        toolbarPanelLayout.setHorizontalGroup(
 	            toolbarPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	            .addComponent(topToolBar, GroupLayout.PREFERRED_SIZE, 1280, GroupLayout.PREFERRED_SIZE)
+	            .addGap(0, 1320, Short.MAX_VALUE)
+	            .addGroup(toolbarPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	                .addGroup(toolbarPanelLayout.createSequentialGroup()
+	                    .addContainerGap()
+	                    .addComponent(topToolBar, GroupLayout.PREFERRED_SIZE, 1290, GroupLayout.PREFERRED_SIZE)
+	                    .addContainerGap(20, Short.MAX_VALUE)))
 	        );
 	        toolbarPanelLayout.setVerticalGroup(
 	            toolbarPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	            .addComponent(topToolBar, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+	            .addGap(0, 40, Short.MAX_VALUE)
+	            .addGroup(toolbarPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+	                .addComponent(topToolBar, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
 	        );
 
 	}

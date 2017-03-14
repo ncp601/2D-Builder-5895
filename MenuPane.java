@@ -95,11 +95,13 @@ public class MenuPane extends JPanel{
         laundryMenuPanel = new JPanel();
         garageMenuPanel = new JPanel();
         
-//    	fillLabel = new WallComponent();
-//        fillLabel.addMouseListener(this);
+      //------------------------------------------------------------------------------
+        
       //Creates the leftMenuPanel that will hold all the components that can be dragged into a plan
         setBackground(new Color(153, 153, 153));
         setForeground(new Color(255, 255, 255));
+        setMaximumSize(new Dimension(300, 700));
+        setPreferredSize(new Dimension(300, 204));
         setLayout(new CardLayout());
 
       //Creates the first header on the main menu
@@ -264,10 +266,10 @@ public class MenuPane extends JPanel{
                                     .addComponent(stairsButton, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                                     .addGap(46, 46, 46)
                                     .addComponent(windowsButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))
-                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(0, 0, 0))
                         .addGroup(mainMenuPanelLayout.createSequentialGroup()
                             .addGroup(mainMenuPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(structureLabel, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                                .addComponent(structureLabel, GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                                 .addComponent(menuSeparator, GroupLayout.Alignment.TRAILING))
                             .addContainerGap()))))
         );
@@ -308,7 +310,7 @@ public class MenuPane extends JPanel{
                 .addGroup(mainMenuPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(kitchenButton)
                     .addComponent(garageButton))
-                .addContainerGap(455, Short.MAX_VALUE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
       //------------------------------------------------------------------------------

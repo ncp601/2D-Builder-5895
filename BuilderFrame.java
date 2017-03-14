@@ -14,18 +14,13 @@ public class BuilderFrame extends JFrame {
 	
 	// Variables declaration                  
     private JPanel contentPanel;
-    private JLayeredPane innerLayerPanel;
-    private JPanel innerContentPanel;
-    private JPanel dragLayer;
     private JPanel rootPanel;
     
     private JPanel leftMenuHeaderPanel;
     private JLabel overallHeaderLabel;
     
-    TabbedPane tabbedPane = new TabbedPane();
-    MenuPane menuPane = new MenuPane(tabbedPane);
-    ToolBarPane toolbarPane = new ToolBarPane(tabbedPane);
-    ComponentMover compMover = new ComponentMover(tabbedPane, menuPane);
+    UIPanel innerContentPane = new UIPanel();
+    ToolBarPane toolbarPanel = new ToolBarPane(innerContentPane);
     
     public BuilderFrame() {
         initComponents();
@@ -35,9 +30,6 @@ public class BuilderFrame extends JFrame {
 
         rootPanel = new JPanel();
         contentPanel = new JPanel();
-        innerContentPanel = new JPanel();
-        dragLayer = new JPanel();
-        innerLayerPanel = new JLayeredPane();
 
         leftMenuHeaderPanel = new JPanel();
         overallHeaderLabel = new JLabel();
@@ -60,24 +52,6 @@ public class BuilderFrame extends JFrame {
         contentPanel.setBackground(new Color(0, 0, 0));
 
       //------------------------------------------------------------------------------
-        
-        //Creates inner content panel
-        innerContentPanel.setBackground(new Color(0, 0, 0));
-        innerContentPanel.setOpaque(false);
-        
-      //------------------------------------------------------------------------------
-        
-        //Creates dragLayer
-        dragLayer.setBackground(new Color(0, 0, 0));
-        dragLayer.setOpaque(false);
-        
-      //------------------------------------------------------------------------------
-        
-        //Creates the innerLayerPanel 
-        innerLayerPanel.setBackground(new Color(0, 0, 0));
-        innerLayerPanel.setOpaque(false);
-        
-      //------------------------------------------------------------------------------  
         
       //Creates the leftMenuHeaderPanel
         leftMenuHeaderPanel.setBackground(new Color(0, 0, 0));
@@ -116,49 +90,41 @@ public class BuilderFrame extends JFrame {
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(contentPanelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(toolbarPane.getGUI(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(menuPane.getGUI(), GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(leftMenuHeaderPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tabbedPane.getGUI(), GroupLayout.PREFERRED_SIZE, 1055, GroupLayout.PREFERRED_SIZE))))
+                .addGap(5, 5, 5)
+                .addComponent(innerContentPane.getGUI(), GroupLayout.PREFERRED_SIZE, 1270, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(contentPanelLayout.createSequentialGroup()
+                    .addComponent(toolbarPanel.getGUI(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(contentPanelLayout.createSequentialGroup()
-                .addComponent(toolbarPane.getGUI(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addComponent(leftMenuHeaderPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(menuPane.getGUI(), GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(tabbedPane.getGUI(), GroupLayout.PREFERRED_SIZE, 650, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(innerContentPane.getGUI(), GroupLayout.PREFERRED_SIZE, 684, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(contentPanelLayout.createSequentialGroup()
+                    .addComponent(toolbarPanel.getGUI(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 703, Short.MAX_VALUE)))
         );
 
-      //------------------------------------------------------------------------------
-        
-      //Creates the layout for the rootPanel
         GroupLayout rootPanelLayout = new GroupLayout(rootPanel);
         rootPanel.setLayout(rootPanelLayout);
         rootPanelLayout.setHorizontalGroup(
             rootPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(rootPanelLayout.createSequentialGroup()
-                .addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, 1276, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
         );
         rootPanelLayout.setVerticalGroup(
             rootPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            .addGroup(rootPanelLayout.createSequentialGroup()
+                .addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-      //------------------------------------------------------------------------------
-        
-      //Creates the layout for the frame and gets the contentPanel
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,7 +137,7 @@ public class BuilderFrame extends JFrame {
         );
 
         pack();
-    }
+    } 
     
     public JPanel getContentPanel(){
     	return contentPanel;
