@@ -102,7 +102,7 @@ public class BuilderFrame extends JFrame {
             contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(innerContentPane.getGUI(), GroupLayout.PREFERRED_SIZE, 684, GroupLayout.PREFERRED_SIZE)
+                .addComponent(innerContentPane.getGUI(), GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(contentPanelLayout.createSequentialGroup()
@@ -115,7 +115,7 @@ public class BuilderFrame extends JFrame {
         rootPanelLayout.setHorizontalGroup(
             rootPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(rootPanelLayout.createSequentialGroup()
-                .addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, 1276, GroupLayout.PREFERRED_SIZE)
+                .addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 4, Short.MAX_VALUE))
         );
         rootPanelLayout.setVerticalGroup(

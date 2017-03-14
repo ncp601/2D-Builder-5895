@@ -25,7 +25,7 @@ public UIPanel() {
     overallHeaderLabel = new JLabel();
     mainGlassPanel = new JPanel();
 
-    innerContentPanel.setPreferredSize(new Dimension(1260, 690));
+    innerContentPanel.setPreferredSize(new Dimension(1000, 690));
 
     leftMenuHeaderPanel.setBackground(new Color(0, 0, 0));
     leftMenuHeaderPanel.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
@@ -87,12 +87,12 @@ public UIPanel() {
                 .addComponent(menuPane.getGUI(), GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addComponent(leftMenuHeaderPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(tabbedPane.getGUI(), GroupLayout.PREFERRED_SIZE, 1200, GroupLayout.PREFERRED_SIZE)
+            .addComponent(tabbedPane.getGUI(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addGroup(innerContentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(innerContentPaneLayout.createSequentialGroup()
                 .addComponent(mainGlassPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 111, Short.MAX_VALUE)))
+                .addGap(0, 0, Short.MAX_VALUE)))
     );
     
     innerContentPaneLayout.setVerticalGroup(

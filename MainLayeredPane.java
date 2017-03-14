@@ -53,7 +53,7 @@ public class MainLayeredPane extends JLayeredPane /*implements MouseListener, Mo
 	    );
 	    glassPanelLayout.setVerticalGroup(
 	        glassPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	        .addGap(0, 653, Short.MAX_VALUE)
+	        .addGap(0, 150, Short.MAX_VALUE)
 	    );
 	    
 	  //Sets the layers in the layeredPanel
