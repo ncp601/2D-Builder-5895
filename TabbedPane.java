@@ -20,8 +20,11 @@ public class TabbedPane {
     public MainLayeredPane mainLayeredPanel;
     private int tabCounter = 1;
 	private JButton removeButton;
+	private UIPanel innerContentPanel;
 	
-	public TabbedPane() {
+	public TabbedPane(UIPanel inner) {
+		
+	this.innerContentPanel = inner;	
 		
 	//Creates floorTabPanel
     floorTabPanel = new JTabbedPane();

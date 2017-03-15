@@ -14,9 +14,9 @@ private JLabel overallHeaderLabel;
 private JPanel mainGlassPanel;
 private JLayeredPane innerContentPanel;
 
-TabbedPane tabbedPane = new TabbedPane();
+TabbedPane tabbedPane = new TabbedPane(innerContentPanel);
 MenuPane menuPane = new MenuPane(tabbedPane);
-ComponentMover compMover = new ComponentMover(tabbedPane, menuPane);
+ComponentMover compMover = new ComponentMover();
 
 public UIPanel() {
 
