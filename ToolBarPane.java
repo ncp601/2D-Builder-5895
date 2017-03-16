@@ -128,7 +128,8 @@ public class ToolBarPane {
         // TODO 
     }                                                   
 
-    private void newFloorPlanButtonActionPerformed(ActionEvent evt) {                                                   
+    private void newFloorPlanButtonActionPerformed(ActionEvent evt) {    
+    	currentTabbedPane = innerContentPane.getTabbedPane();
     	newPlan = new NewCommand(tbR ,currentTabbedPane);
     	tbM.doCurrentCommand(newPlan);
     }                                                  

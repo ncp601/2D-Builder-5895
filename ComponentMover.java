@@ -28,7 +28,7 @@ public class ComponentMover extends MouseAdapter
 	private boolean potentialDrag;
 
 	private MenuPane menuPane;
-	private TabbedPane tabbedPane;
+	private UIPanel innerContentPanel;
     private FloorComponentFactory factory = new FloorComponentFactory();
     private JPanel dragLayer;
     private String type = "";
@@ -41,9 +41,9 @@ public class ComponentMover extends MouseAdapter
 	 *  Constructor for moving individual components. The components must be
 	 *  regisetered using the registerComponent() method.
 	 */
-	public ComponentMover(TabbedPane tab, MenuPane menu)
+	public ComponentMover(UIPanel inner, MenuPane menu)
 	{
-		this.tabbedPane = tab;
+		this.innerContentPanel = inner;
 		this.menuPane = menu;
 	}
 
@@ -233,6 +233,13 @@ public class ComponentMover extends MouseAdapter
 			int height = source.getSize().height - dragInsets.top - dragInsets.bottom;
 			Rectangle r = new Rectangle(dragInsets.left, dragInsets.top, width, height);
 	
+			currentComponent = (FloorComponent)e.getSource();
+    		type = currentComponent.getComponentType();
+	    	newComponent = factory.getComponent(type);
+			
+			dragLayer = innerContentPanel.getGlassPane();
+			dragLayer.add(newComponent);
+			
 			if (r.contains(e.getPoint()))
 				setupForDragging(e);
 	}

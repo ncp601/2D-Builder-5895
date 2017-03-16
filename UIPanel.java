@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class UIPanel extends JLayeredPane{
+public class UIPanel {
 
 //Variables declaration                    
 
@@ -12,11 +12,11 @@ private JPanel leftMenuHeaderPanel;
 private JLabel overallHeaderLabel;
 
 private JPanel mainGlassPanel;
-private JLayeredPane innerContentPanel;
 
+JLayeredPane innerContentPanel = new JLayeredPane();
 TabbedPane tabbedPane = new TabbedPane(innerContentPanel);
 MenuPane menuPane = new MenuPane(tabbedPane);
-ComponentMover compMover = new ComponentMover();
+ComponentMover compMover = new ComponentMover(innerContentPanel, menuPane );
 
 public UIPanel() {
 
@@ -116,5 +116,14 @@ public UIPanel() {
 public JLayeredPane getGUI(){
 	return innerContentPanel;
 }
+
+public JPanel getGlassPane(){
+	return mainGlassPanel;
+}
+
+public TabbedPane getTabbedPane(){
+	return tabbedPane;
+}
+
 
 }
