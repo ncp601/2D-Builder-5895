@@ -1,8 +1,5 @@
 package Frame;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Point;
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
@@ -15,12 +12,11 @@ public class ComponentMover extends MouseAdapter
 	private boolean changeCursor = true;
 	private boolean autoLayout = false;
 
-	private Class destinationClass;
-	private Component destinationComponent;
 	private Component destination;
 	private Component source;
 
 	private Point pressed;
+	private Point originalLocation;
 	private Point location;
 
 	private Cursor originalCursor;
@@ -28,12 +24,16 @@ public class ComponentMover extends MouseAdapter
 	private boolean potentialDrag;
 
 	private MenuPane menuPane;
+	private JLayeredPane innerContentPanel;
 	private JPanel dragLayer;
     private FloorComponentFactory factory = new FloorComponentFactory();
     private String type = "";
     private FloorComponent newComponent;
     private FloorComponent currentComponent;
+    private Component[] onGrid;
 	
+    private Dimension componentSize = new Dimension(110, 110);
+    
 	private InnerPanel innerPanel;
 
 //	/**
@@ -50,37 +50,7 @@ public class ComponentMover extends MouseAdapter
 	 *  Constructor for moving individual components. The components must be
 	 *  regisetered using the registerComponent() method.
 	 */
-	public ComponentMover()
-	{	
-	}
-	
-	/**
-	 *  Constructor to specify a Class of Component that will be moved when
-	 *  drag events are generated on a registered child component. The events
-	 *  will be passed to the first ancestor of this specified class.
-	 *
-	 *  @param destinationClass  the Class of the ancestor component
-	 *  @param component         the Components to be registered for forwarding
-	 *                           drag events to the ancestor Component.
-	 */
-	public ComponentMover(Class destinationClass, Component... components)
-	{
-		this.destinationClass = destinationClass;
-		registerComponent( components );
-	}
-
-	/**
-	 *  Constructor to specify a parent component that will be moved when drag
-	 *  events are generated on a registered child component.
-	 *
-	 *  @param destinationComponent  the component drage events should be forwareded to
-	 *  @param components    the Components to be registered for forwarding drag
-	 *                       events to the parent component to be moved
-	 */
-	public ComponentMover(Component destinationComponent, Component... components)
-	{
-		this.destinationComponent = destinationComponent;
-		registerComponent( components );
+	public ComponentMover(){	
 	}
 
 	/**
@@ -171,28 +141,6 @@ public class ComponentMover extends MouseAdapter
 	}
 
 	/**
-	 *  Remove listeners from the specified component
-	 *
-	 *  @param component  the component the listeners are removed from
-	 */
-	public void deregisterComponent(Component... components)
-	{
-		for (Component component : components)
-			component.removeMouseListener( this );
-	}
-
-	/**
-	 *  Add the required listeners to the specified component
-	 *
-	 *  @param component  the component the listeners are added to
-	 */
-	public void registerComponent(Component... components)
-	{
-		for (Component component : components)
-			component.addMouseListener( this );
-	}
-
-	/**
 	 *	Get the snap size
 	 *
 	 *  @return the snap size
@@ -225,24 +173,28 @@ public class ComponentMover extends MouseAdapter
 	 *      component coordinates.
 	 */
 	@Override
-	public void mousePressed(MouseEvent e)
-	{
+	public void mousePressed(MouseEvent e){
+		
+		innerPanel = InnerPanel.getInstance();
+		
 			source = e.getComponent();
-			int width  = source.getSize().width  - dragInsets.left - dragInsets.right;
-			int height = source.getSize().height - dragInsets.top - dragInsets.bottom;
-			Rectangle r = new Rectangle(dragInsets.left, dragInsets.top, width, height);
+			originalLocation = source.getLocationOnScreen();
 	
 			currentComponent = (FloorComponent)e.getSource();
     		type = currentComponent.getComponentType();
     		System.out.println(type);
 	    	newComponent = factory.getComponent(type);
-			
-	    	innerPanel = InnerPanel.getInstance();
-	    	dragLayer = innerPanel.getGlassPanel();
-	    	dragLayer.add(currentComponent);
+//	    	newComponent.setLocation(originalLocation);
+	    	
+	    	int width  = newComponent.getImageSize().width  - dragInsets.left - dragInsets.right;
+			int height = newComponent.getImageSize().height - dragInsets.top - dragInsets.bottom;
+			Rectangle r = new Rectangle(dragInsets.left, dragInsets.top, width, height);
+	    	
+			dragLayer = innerPanel.getGlassPanel();
+	    	dragLayer.add(newComponent);
 	    	innerPanel.getMenuPane().repaint();
-	    	
-	    	
+//	    	innerPanel.getGUI().revalidate();
+			
 			if (r.contains(e.getPoint()))
 				setupForDragging(e);
 	}
@@ -253,20 +205,7 @@ public class ComponentMover extends MouseAdapter
 		source.addMouseMotionListener( this );
 		potentialDrag = true;
 
-		//  Determine the component that will ultimately be moved
-
-		if (destinationComponent != null)
-		{
-			destination = destinationComponent;
-		}
-		else if (destinationClass == null)
-		{
-			destination = source;
-		}
-		else  //  forward events to destination component
-		{
-			destination = SwingUtilities.getAncestorOfClass(destinationClass, source);
-		}
+		destination = source;
 
 		pressed = e.getLocationOnScreen();
 		location = destination.getLocation();
@@ -274,7 +213,7 @@ public class ComponentMover extends MouseAdapter
 		if (changeCursor)
 		{
 			originalCursor = source.getCursor();
-			source.setCursor( Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR) );
+			destination.setCursor( Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR) );
 		}
 
 		//  Making sure autoscrolls is false will allow for smoother dragging of
@@ -306,19 +245,19 @@ public class ComponentMover extends MouseAdapter
 		//  is moved. Adjust the location to make sure we are still on a
 		//  snap value.
 
-		while (locationX < edgeInsets.left)
-			locationX += snapSize.width;
-
-		while (locationY < edgeInsets.top)
-			locationY += snapSize.height;
-
-		Dimension d = getBoundingSize( destination );
-
-		while (locationX + destination.getSize().width + edgeInsets.right > d.width)
-			locationX -= snapSize.width;
-
-		while (locationY + destination.getSize().height + edgeInsets.bottom > d.height)
-			locationY -= snapSize.height;
+//		while (locationX < edgeInsets.left)
+//			locationX += snapSize.width;
+//
+//		while (locationY < edgeInsets.top)
+//			locationY += snapSize.height;
+//
+//		Dimension d = getBoundingSize( destination );
+//
+//		while (locationX + destination.getSize().width + edgeInsets.right > d.width)
+//			locationX -= snapSize.width;
+//
+//		while (locationY + destination.getSize().height + edgeInsets.bottom > d.height)
+//			locationY -= snapSize.height;
 
 		//  Adjustments are finished, move the component
 
@@ -360,15 +299,28 @@ public class ComponentMover extends MouseAdapter
 	 *  Restore the original state of the Component
 	 */
 	@Override
-	public void mouseReleased(MouseEvent e)
-	{
+	public void mouseReleased(MouseEvent e) {
+		
+		innerPanel = InnerPanel.getInstance();
+		
 		if (!potentialDrag) return;
 		
 		innerPanel = InnerPanel.getInstance();
-    	dragLayer = innerPanel.getGlassPanel();
-    	dragLayer.remove(currentComponent);
-    	innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().add(currentComponent);
-    	innerPanel.getMenuPane().revalidate();
+		innerContentPanel = innerPanel.getGUI();
+		
+		dragLayer.remove(currentComponent);
+		currentComponent = null;
+		innerPanel.getMenuPane().revalidate();
+		newComponent.setSize(componentSize);
+    	innerPanel.getTabbedPane().getMainLayeredPanel().add(newComponent, JLayeredPane.DRAG_LAYER);
+    	innerPanel.getTabbedPane().getMainLayeredPanel().revalidate();
+    	
+    	onGrid = innerPanel.getTabbedPane().getMainLayeredPanel().getComponentsInLayer(JLayeredPane.DRAG_LAYER);
+    	
+    	for(int i = 0; i < onGrid.length; i++ ){
+    		type = onGrid[i].toString();
+    		System.out.println(type);
+    	}
 		
 		source.removeMouseMotionListener( this );
 		potentialDrag = false;
@@ -395,4 +347,16 @@ public class ComponentMover extends MouseAdapter
 			}
 		}
 	}
+	
+	@Override 
+	public void mouseEntered(MouseEvent e){
+		
+	}
+	
+	@Override 
+	public void mouseExited(MouseEvent e){
+		
+	}
+	
+	
 }

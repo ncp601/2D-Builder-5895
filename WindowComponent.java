@@ -11,15 +11,20 @@ public class WindowComponent extends FloorComponent{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	final private String componentType = "WALL";
+	final private String componentType = "WINDOW";
 	private int xPosition;
 	private int yPosition;
 	private boolean isStackable = false;
+	private Dimension size = new Dimension(110, 110);
 	
 	private ComponentMover compMove = new ComponentMover();
 	
 	public WindowComponent(){
-		createComponent();
+		addMouseListener(compMove);
+        addMouseMotionListener(compMove);
+        setPreferredSize(size);
+        createComponent();
+		setVisible(true);
 	}
 	
 	@Override
@@ -31,5 +36,10 @@ public class WindowComponent extends FloorComponent{
 	@Override
 	public String getComponentType(){
 		return componentType;
+	}
+	
+	@Override
+	public Dimension getImageSize(){
+		return size;
 	}
 }

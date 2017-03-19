@@ -15,6 +15,8 @@ public class InnerPanel {
 	private TabbedPane tabbedPane;
 	private MenuPane menuPane;
 	
+	private Dimension size = new Dimension(1260, 680);
+	
 	private static InnerPanel instance = null;
 	
 	protected InnerPanel() {
@@ -26,8 +28,9 @@ public class InnerPanel {
 	    overallHeaderLabel = new JLabel();
 	    mainGlassPanel = new JPanel();
 	    
-	    innerContentPanel.setPreferredSize(new Dimension(1260, 680));
-
+	    innerContentPanel.setPreferredSize(size);
+	    innerContentPanel.setMaximumSize(size);
+	    
 	    leftMenuHeaderPanel.setBackground(new Color(0, 0, 0));
 	    leftMenuHeaderPanel.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
@@ -87,7 +90,7 @@ public class InnerPanel {
 	        innerContentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 	        .addGroup(innerContentPaneLayout.createSequentialGroup()
 	            .addGroup(innerContentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-	                .addComponent(menuPane.getGUI(), GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+	                .addComponent(menuPane.getGUI(), GroupLayout.PREFERRED_SIZE, 0, 300)
 	                .addComponent(leftMenuHeaderPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 	            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 	            .addComponent(tabbedPane.getGUI(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -105,8 +108,8 @@ public class InnerPanel {
 	                .addGroup(innerContentPaneLayout.createSequentialGroup()
 	                    .addComponent(leftMenuHeaderPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 	                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-	                    .addComponent(menuPane.getGUI(), GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-	                .addComponent(tabbedPane.getGUI()))
+	                    .addComponent(menuPane.getGUI(), GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, 605))
+	                .addComponent(tabbedPane.getGUI(), 0, 650, GroupLayout.PREFERRED_SIZE))
 	            .addContainerGap())
 	        .addGroup(innerContentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 	            .addGroup(innerContentPaneLayout.createSequentialGroup()

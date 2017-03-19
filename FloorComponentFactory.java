@@ -11,6 +11,14 @@ public class FloorComponentFactory {
 			return new WallComponent();
 		}
 		
+		else if(componentType == "WINDOW"){
+			return new WindowComponent();
+		}
+		
+		else if(componentType == "DOOR"){
+			return new DoorComponent();
+		}
+		
 		else
 			return null;
 	}

@@ -19,7 +19,8 @@ public class TabbedPane {
     protected JTabbedPane floorTabPanel;
     public MainLayeredPane mainLayeredPanel;
     private int tabCounter = 1;
-	private JButton removeButton;
+	private TabButton removeButton;
+	
 	
 	public TabbedPane() {
 		

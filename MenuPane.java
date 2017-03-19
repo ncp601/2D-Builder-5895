@@ -50,7 +50,7 @@ public class MenuPane extends JPanel{
     private TabbedPane tabbedPane;
     private FloorComponentFactory factory;
     private String type = "";
-    private WallComponent fillLabel;
+    private FloorComponent fillLabel;
     private FloorComponent newComponent;
     private FloorComponent currentComponent;
     private Boolean componentSet = false;
@@ -93,14 +93,17 @@ public class MenuPane extends JPanel{
         laundryMenuPanel = new JPanel();
         garageMenuPanel = new JPanel();
         
-      //------------------------------------------------------------------------------
+      //------------------------------------------------------------------------------      
         
       //Creates the leftMenuPanel that will hold all the components that can be dragged into a plan
         setBackground(new Color(153, 153, 153));
         setForeground(new Color(255, 255, 255));
         setMaximumSize(new Dimension(300, 700));
-        setPreferredSize(new Dimension(300, 204));
+        setPreferredSize(new Dimension(300, 700));
+        setMinimumSize(new Dimension(0, 0));
         setLayout(new CardLayout());
+
+        wallsMenuPanel.setMaximumSize(new Dimension(300, 700));
 
       //Creates the first header on the main menu
         structureLabel.setText("Structure");
@@ -336,10 +339,10 @@ public class MenuPane extends JPanel{
         fillLabel = new WallComponent();
         wallsMenuPanel.add(fillLabel);
         
-        fillLabel = new WallComponent();
+        fillLabel = new DoorComponent();
         wallsMenuPanel.add(fillLabel);
 
-        fillLabel = new WallComponent();
+        fillLabel = new WindowComponent();
         wallsMenuPanel.add(fillLabel);
 
         fillLabel = new WallComponent();
@@ -524,34 +527,34 @@ public class MenuPane extends JPanel{
           
         add(garageMenuPanel, "GARAGE");
     	  
-        addMouseListener(new MouseAdapter(){
-            @Override
-          public void mousePressed(MouseEvent evt){
-          	try{
-          		currentComponent = (FloorComponent)evt.getSource();
-          		type = currentComponent.getComponentType();
-        	    newComponent = factory.getComponent(type);
-        	    componentSet = true;
-          	}
-          	catch(Exception notC){}
-          }
-            	
-          //-------------------------------------------------------------------------------------------------------------   
-            
-            @Override
-            public void mouseExited(MouseEvent evt){
-            	try{
-            		currentComponent = (FloorComponent)evt.getSource();
-            		type = currentComponent.getComponentType();
-        	    	newComponent = factory.getComponent(type);
-        	    	tabbedPane.mainLayeredPanel.addToGlassPane(newComponent);
-        	    	componentSet = true;
-            	}
-            	catch(Exception notC){}
-            }
-            
-            });
-          //------------------------------------------------------------------------------------------------------------- 
+//        addMouseListener(new MouseAdapter(){
+//            @Override
+//          public void mousePressed(MouseEvent evt){
+//          	try{
+//          		currentComponent = (FloorComponent)evt.getSource();
+//          		type = currentComponent.getComponentType();
+//        	    newComponent = factory.getComponent(type);
+//        	    componentSet = true;
+//          	}
+//          	catch(Exception notC){}
+//          }
+//            	
+//          //-------------------------------------------------------------------------------------------------------------   
+//            
+//            @Override
+//            public void mouseExited(MouseEvent evt){
+//            	try{
+//            		currentComponent = (FloorComponent)evt.getSource();
+//            		type = currentComponent.getComponentType();
+//        	    	newComponent = factory.getComponent(type);
+//        	    	tabbedPane.mainLayeredPanel.addToGlassPane(newComponent);
+//        	    	componentSet = true;
+//            	}
+//            	catch(Exception notC){}
+//            }
+//            
+//            });
+//          //------------------------------------------------------------------------------------------------------------- 
         
     }
     
@@ -567,6 +570,10 @@ public class MenuPane extends JPanel{
     
     public FloorComponent getFloorComponent(){
     	return newComponent;
+    }
+    
+    public void addToWallsPanel(FloorComponent c){
+    	wallsMenuPanel.add(c);
     }
     
     //Gets the current leftMenuPanel
