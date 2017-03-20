@@ -8,7 +8,7 @@ public class ComponentMover extends MouseAdapter
 {
 	private Insets dragInsets = new Insets(0, 0, 0, 0);
 	private Dimension snapSize = new Dimension(1, 1);
-	private Insets edgeInsets = new Insets(0, 0, 0, 0);
+//	private Insets edgeInsets = new Insets(0, 0, 0, 0);
 	private boolean changeCursor = true;
 	private boolean autoLayout = false;
 
@@ -55,116 +55,6 @@ public class ComponentMover extends MouseAdapter
 	public ComponentMover(){	
 	}
 
-	/**
-	 *  Get the auto layout property
-	 *
-	 *  @return  the auto layout property
-	 */
-	public boolean isAutoLayout()
-	{
-		return autoLayout;
-	}
-
-	/**
-	 *  Set the auto layout property
-	 *
-	 *  @param  autoLayout when true layout will be invoked on the parent container
-	 */
-	public void setAutoLayout(boolean autoLayout)
-	{
-		this.autoLayout = autoLayout;
-	}
-
-	/**
-	 *  Get the change cursor property
-	 *
-	 *  @return  the change cursor property
-	 */
-	public boolean isChangeCursor()
-	{
-		return changeCursor;
-	}
-
-	/**
-	 *  Set the change cursor property
-	 *
-	 *  @param  changeCursor when true the cursor will be changed to the
-	 *                       Cursor.MOVE_CURSOR while the mouse is pressed
-	 */
-	public void setChangeCursor(boolean changeCursor)
-	{
-		this.changeCursor = changeCursor;
-	}
-
-	/**
-	 *  Get the drag insets
-	 *
-	 *  @return  the drag insets
-	 */
-	public Insets getDragInsets()
-	{
-		return dragInsets;
-	}
-
-	/**
-	 *  Set the drag insets. The insets specify an area where mouseDragged
-	 *  events should be ignored and therefore the component will not be moved.
-	 *  This will prevent these events from being confused with a
-	 *  MouseMotionListener that supports component resizing.
-	 *
-	 *  @param  dragInsets
-	 */
-	public void setDragInsets(Insets dragInsets)
-	{
-		this.dragInsets = dragInsets;
-	}
-
-	/**
-	 *  Get the bounds insets
-	 *
-	 *  @return  the bounds insets
-	 */
-	public Insets getEdgeInsets()
-	{
-		return edgeInsets;
-	}
-
-	/**
-	 *  Set the edge insets. The insets specify how close to each edge of the parent
-	 *  component that the child component can be moved. Positive values means the
-	 *  component must be contained within the parent. Negative values means the
-	 *  component can be moved outside the parent.
-	 *
-	 *  @param  edgeInsets
-	 */
-	public void setEdgeInsets(Insets edgeInsets)
-	{
-		this.edgeInsets = edgeInsets;
-	}
-
-	/**
-	 *	Get the snap size
-	 *
-	 *  @return the snap size
-	 */
-	public Dimension getSnapSize()
-	{
-		return snapSize;
-	}
-
-	/**
-	 *  Set the snap size. Forces the component to be snapped to
-	 *  the closest grid position. Snapping will occur when the mouse is
-	 *  dragged half way.
-	 */
-	public void setSnapSize(Dimension snapSize)
-	{
-		if (snapSize.width < 1
-		||  snapSize.height < 1)
-			throw new IllegalArgumentException("Snap sizes must be greater than 0");
-
-		this.snapSize = snapSize;
-	}
 	
 	/**
 	 *  Setup the variables used to control the moving of the component:
@@ -191,7 +81,6 @@ public class ComponentMover extends MouseAdapter
 		    	newComponent = factory.getComponent(type);
 		    	
 		    	newComponent.setVisible(true);
-		    	innerPanel.getTabbedPane().getMainLayeredPanel().setVisible(true);
 		    	
 		    	int width  = newComponent.getImageSize().width  - dragInsets.left - dragInsets.right;
 				int height = newComponent.getImageSize().height - dragInsets.top - dragInsets.bottom;
@@ -309,23 +198,6 @@ public class ComponentMover extends MouseAdapter
 		return drag;
 	}
 
-	/*
-	 *  Get the bounds of the parent of the dragged component.
-	 */
-	private Dimension getBoundingSize(Component source)
-	{
-		if (source instanceof Window)
-		{
-			GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			Rectangle bounds = env.getMaximumWindowBounds();
-			return new Dimension(bounds.width, bounds.height);
-		}
-		else
-		{
-			return source.getParent().getSize();
-		}
-	}
-
 	/**
 	 *  Restore the original state of the Component
 	 */
@@ -335,6 +207,8 @@ public class ComponentMover extends MouseAdapter
 		innerPanel = InnerPanel.getInstance();
 		releasedOperaion = true;
 		releasedOperationInside = true;
+		Component temp = innerPanel.getTabbedPane().getGUI().getSelectedComponent();
+		MainLayeredPane selectedTab = (MainLayeredPane) temp;
 		
 		releaseLocation = e.getLocationOnScreen();
 		System.out.println(releaseLocation);
@@ -352,10 +226,10 @@ public class ComponentMover extends MouseAdapter
 			}
 			
 			else {
-				innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().remove(newComponent);
+				selectedTab.getGlassPanel().remove(newComponent);
 				System.out.println("Couldn't add component - Out of bounds");
-				innerPanel.getTabbedPane().getMainLayeredPanel().revalidate();
-		    	innerPanel.getTabbedPane().getMainLayeredPanel().repaint();
+		    	selectedTab.revalidate();
+		    	selectedTab.repaint();
 			}
 		}
 		
@@ -377,8 +251,8 @@ public class ComponentMover extends MouseAdapter
 	    	}
 		}
 		
-    	onGrid = innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().getComponents();
-    	
+		onGrid = selectedTab.getGlassPanel().getComponents();
+		
     	for(int i = 0; i < onGrid.length; i++ ){
     		type = onGrid[i].toString();
     		System.out.println(type);
