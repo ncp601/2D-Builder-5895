@@ -26,7 +26,7 @@ public class ToolBarPane {
     
     private TabbedPane currentTabbedPane;
     
-    InnerPanel innerContentPanel = InnerPanel.getInstance();
+    private InnerPanel innerPanel;
     
     //tbM.doCurrentCommand(tbR, newPlan);
     //tbM.doCurrentCommand(tbR, loadPlan);
@@ -115,7 +115,7 @@ public class ToolBarPane {
 	            .addGroup(toolbarPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 	                .addComponent(topToolBar, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
 	        );
-
+	        
 	}
 	
 	//Gets the current toolbarPanel 
@@ -128,7 +128,8 @@ public class ToolBarPane {
     }                                                   
 
     private void newFloorPlanButtonActionPerformed(ActionEvent evt) {    
-    	currentTabbedPane = innerContentPanel.getTabbedPane();
+    	innerPanel = InnerPanel.getInstance();
+    	currentTabbedPane = innerPanel.getTabbedPane();
     	newPlan = new NewCommand(tbR ,currentTabbedPane);
     	tbM.doCurrentCommand(newPlan);
     }                                                  

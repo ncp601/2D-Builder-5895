@@ -25,6 +25,8 @@ public class DoorComponent extends FloorComponent{
         setPreferredSize(size);
         createComponent();
         setVisible(true);
+		setMaximumSize(size);
+		setMinimumSize(size);
 	}
 	
 	@Override

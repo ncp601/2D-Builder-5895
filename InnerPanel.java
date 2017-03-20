@@ -9,13 +9,19 @@ public class InnerPanel {
 	
 	private JPanel leftMenuHeaderPanel;
 	private JLabel overallHeaderLabel;
-	private JPanel mainGlassPanel;
 
 	private JLayeredPane innerContentPanel;
 	private TabbedPane tabbedPane;
 	private MenuPane menuPane;
 	
+	private boolean inMenuPane;
+	private boolean inMainLayeredPane;
+	private boolean inToolBarPane;
+	private boolean createComponent;
+	
 	private Dimension size = new Dimension(1260, 680);
+	
+	private ComponentMover compMove = new ComponentMover();
 	
 	private static InnerPanel instance = null;
 	
@@ -26,7 +32,9 @@ public class InnerPanel {
 		innerContentPanel  = new JLayeredPane();
 	    leftMenuHeaderPanel = new JPanel();
 	    overallHeaderLabel = new JLabel();
-	    mainGlassPanel = new JPanel();
+	    
+	    innerContentPanel.addMouseListener(compMove);
+	    innerContentPanel.addMouseMotionListener(compMove);
 	    
 	    innerContentPanel.setPreferredSize(size);
 	    innerContentPanel.setMaximumSize(size);
@@ -56,32 +64,10 @@ public class InnerPanel {
 	            .addComponent(overallHeaderLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 	    );
 
-	    mainGlassPanel.setBackground(new Color(0, 0, 0, 0));
-	    mainGlassPanel.setMaximumSize(innerContentPanel.getMaximumSize());
-	    mainGlassPanel.setMinimumSize(innerContentPanel.getMinimumSize());
-	    mainGlassPanel.setOpaque(false);
-	    mainGlassPanel.setPreferredSize(innerContentPanel.getPreferredSize());
-
-	    
-	    //MainGlassPanel group layout 
-	    GroupLayout mainGlassPanelLayout = new GroupLayout(mainGlassPanel);
-	    mainGlassPanel.setLayout(mainGlassPanelLayout);
-	    mainGlassPanelLayout.setHorizontalGroup(
-	        mainGlassPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	        .addGap(0, 0, Short.MAX_VALUE)
-	    );
-	    
-	    mainGlassPanelLayout.setVerticalGroup(
-	        mainGlassPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	        .addGap(0, 0, Short.MAX_VALUE)
-	    );
-
 	    //Adds panels to the LayeredPane
 	    innerContentPanel.setLayer(menuPane.getGUI(), JLayeredPane.DEFAULT_LAYER);
 	    innerContentPanel.setLayer(tabbedPane.getGUI(), JLayeredPane.DEFAULT_LAYER);
 	    innerContentPanel.setLayer(leftMenuHeaderPanel, JLayeredPane.DEFAULT_LAYER);
-	    innerContentPanel.setLayer(mainGlassPanel, JLayeredPane.DRAG_LAYER);
-
 	    
 	    //Creates the group layout for the innerContentPane
 	    GroupLayout innerContentPaneLayout = new GroupLayout(innerContentPanel);
@@ -95,10 +81,6 @@ public class InnerPanel {
 	            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 	            .addComponent(tabbedPane.getGUI(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 	            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-	        .addGroup(innerContentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	            .addGroup(innerContentPaneLayout.createSequentialGroup()
-	                .addComponent(mainGlassPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-	                .addGap(0, 0, Short.MAX_VALUE)))
 	    );
 	    
 	    innerContentPaneLayout.setVerticalGroup(
@@ -111,20 +93,20 @@ public class InnerPanel {
 	                    .addComponent(menuPane.getGUI(), GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, 605))
 	                .addComponent(tabbedPane.getGUI(), 0, 650, GroupLayout.PREFERRED_SIZE))
 	            .addContainerGap())
-	        .addGroup(innerContentPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-	            .addGroup(innerContentPaneLayout.createSequentialGroup()
-	                .addComponent(mainGlassPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-	                .addGap(0, 0, Short.MAX_VALUE)))
-	    );
-	            
+	    );    
+	    
 	}
 
+	//------------------------------------------------------------------------------------------------
+	
 	public static InnerPanel getInstance() {
 		   if(instance == null) {
 		      instance = new InnerPanel();
 		   }
 		   return instance;
-		   }
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	
 	public JLayeredPane getGUI(){
 		return innerContentPanel;
@@ -134,12 +116,44 @@ public class InnerPanel {
 		return tabbedPane;
 	}
 	
-	public JPanel getGlassPanel(){
-		return mainGlassPanel;
-	}
-	
 	public JPanel getMenuPane(){
 		return menuPane;
 	}
 
+	public boolean getInMenuPane(){
+		return inMenuPane;
+	}
+	
+	public boolean getInMainLayeredPane(){
+		return inMainLayeredPane;
+	}
+
+	public boolean getInToolBarPane(){
+		return inToolBarPane;
+	}
+	
+	public boolean getCreateComponent(){
+		return createComponent;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	
+	public void setInMenuPane(Boolean m){
+		inMenuPane = m;
+	}
+	
+	public void setInMainLayeredPane(Boolean m){
+		inMainLayeredPane = m;
+	}
+
+	public void setInToolBarPane(Boolean m){
+		inToolBarPane = m;
+	}
+	
+	public void setCreateComponent(Boolean m){
+		createComponent = m;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	
 }

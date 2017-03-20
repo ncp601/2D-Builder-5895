@@ -16,21 +16,27 @@ public class ComponentMover extends MouseAdapter
 	private Component source;
 
 	private Point pressed;
-	private Point originalLocation;
 	private Point location;
 
 	private Cursor originalCursor;
 	private boolean autoscrolls;
 	private boolean potentialDrag;
 
-	private MenuPane menuPane;
 	private JLayeredPane innerContentPanel;
-	private JPanel dragLayer;
     private FloorComponentFactory factory = new FloorComponentFactory();
     private String type = "";
     private FloorComponent newComponent;
     private FloorComponent currentComponent;
     private Component[] onGrid;
+	
+    private int dragX = 0;
+	private int dragY = 0;
+	
+	private int locationX = 0;
+	private int locationY = 0;
+    
+	private boolean pressedOperation;
+	private boolean releasedOperaion;
 	
     private Dimension componentSize = new Dimension(110, 110);
     
@@ -176,27 +182,55 @@ public class ComponentMover extends MouseAdapter
 	public void mousePressed(MouseEvent e){
 		
 		innerPanel = InnerPanel.getInstance();
+		source = e.getComponent();
+		currentComponent = (FloorComponent)e.getSource();
+		pressedOperation = true;
 		
-			source = e.getComponent();
-			originalLocation = source.getLocationOnScreen();
-	
-			currentComponent = (FloorComponent)e.getSource();
-    		type = currentComponent.getComponentType();
-    		System.out.println(type);
-	    	newComponent = factory.getComponent(type);
-//	    	newComponent.setLocation(originalLocation);
-	    	
-	    	int width  = newComponent.getImageSize().width  - dragInsets.left - dragInsets.right;
-			int height = newComponent.getImageSize().height - dragInsets.top - dragInsets.bottom;
-			Rectangle r = new Rectangle(dragInsets.left, dragInsets.top, width, height);
-	    	
-			dragLayer = innerPanel.getGlassPanel();
-	    	dragLayer.add(newComponent);
-	    	innerPanel.getMenuPane().repaint();
-//	    	innerPanel.getGUI().revalidate();
+			if(!(innerPanel.getInMainLayeredPane()) && !(currentComponent.getIsNewComponent()) && pressedOperation){
+				pressedOperation = false;
+				innerPanel.setCreateComponent(false);
+				currentComponent = (FloorComponent)e.getSource();
+	    		type = currentComponent.getComponentType();
+	    		System.out.println(type);
+		    	newComponent = factory.getComponent(type);
+		    	
+		    	newComponent.setVisible(true);
+		    	innerPanel.getTabbedPane().getMainLayeredPanel().setVisible(true);
+		    	
+		    	int width  = newComponent.getImageSize().width  - dragInsets.left - dragInsets.right;
+				int height = newComponent.getImageSize().height - dragInsets.top - dragInsets.bottom;
+				Rectangle r = new Rectangle(dragInsets.left, dragInsets.top, width, height);
+		    	
+				innerContentPanel = innerPanel.getGUI();
+				innerContentPanel.add(newComponent, JLayeredPane.DRAG_LAYER);
+				
+				if (r.contains(e.getPoint()))
+					setupForDragging(e);
+				
+				innerPanel.getMenuPane().repaint();
+		    	innerPanel.getGUI().revalidate();
+		    	System.out.println("Adding newComponent");
+			}
+				
+			if(!(innerPanel.getInMenuPane()) && currentComponent.getIsNewComponent() && pressedOperation){
+				pressedOperation = false;
+				int width  = source.getSize().width  - dragInsets.left - dragInsets.right;
+				int height = source.getSize().height - dragInsets.top - dragInsets.bottom;
+				Rectangle r = new Rectangle(dragInsets.left, dragInsets.top, width, height);
+				
+				if (r.contains(e.getPoint()))
+					setupForDragging(e);
+				
+				innerPanel.getMenuPane().repaint();
+		    	innerPanel.getGUI().revalidate();
+		    	System.out.println("Moving Component");
+			}
 			
-			if (r.contains(e.getPoint()))
-				setupForDragging(e);
+			else {
+				return;
+			}
+		    	
+			
 	}
 	
 	//Sets up the component for the dragging operation 
@@ -235,11 +269,11 @@ public class ComponentMover extends MouseAdapter
 	public void mouseDragged(MouseEvent e)
 	{
 		Point dragged = e.getLocationOnScreen();
-		int dragX = getDragDistance(dragged.x, pressed.x, snapSize.width);
-		int dragY = getDragDistance(dragged.y, pressed.y, snapSize.height);
+		dragX = getDragDistance(dragged.x, pressed.x, snapSize.width);
+		dragY = getDragDistance(dragged.y, pressed.y, snapSize.height);
 
-		int locationX = location.x + dragX;
-		int locationY = location.y + dragY;
+		locationX = location.x + dragX;
+		locationY = location.y + dragY;
 
 		//  Mouse dragged events are not generated for every pixel the mouse
 		//  is moved. Adjust the location to make sure we are still on a
@@ -261,6 +295,7 @@ public class ComponentMover extends MouseAdapter
 
 		//  Adjustments are finished, move the component
 
+		innerPanel.getGUI().repaint();
 		destination.setLocation(locationX, locationY);
 	}
 
@@ -302,20 +337,34 @@ public class ComponentMover extends MouseAdapter
 	public void mouseReleased(MouseEvent e) {
 		
 		innerPanel = InnerPanel.getInstance();
+		releasedOperaion = true;
 		
 		if (!potentialDrag) return;
 		
-		innerPanel = InnerPanel.getInstance();
 		innerContentPanel = innerPanel.getGUI();
 		
-		dragLayer.remove(currentComponent);
-		currentComponent = null;
-		innerPanel.getMenuPane().revalidate();
-		newComponent.setSize(componentSize);
-    	innerPanel.getTabbedPane().getMainLayeredPanel().add(newComponent, JLayeredPane.DRAG_LAYER);
-    	innerPanel.getTabbedPane().getMainLayeredPanel().revalidate();
-    	
-    	onGrid = innerPanel.getTabbedPane().getMainLayeredPanel().getComponentsInLayer(JLayeredPane.DRAG_LAYER);
+		if(!(innerPanel.getInMainLayeredPane()) && !(currentComponent.getIsNewComponent()) && releasedOperaion){
+			releasedOperaion = false;
+			newComponent.setIsNewComponent(true);
+			releasedOperaion = false;
+			innerPanel.getMenuPane().revalidate();
+			innerContentPanel.remove(newComponent);
+			newComponent.setSize(componentSize);
+	    	innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().add(newComponent);
+	    	newComponent.setLocation(source.getX() - 220, source.getY());
+	    	innerPanel.getTabbedPane().getMainLayeredPanel().revalidate();
+	    	System.out.println("Adding Component to Grid");
+		}
+		
+		if(!(innerPanel.getInMenuPane()) && currentComponent.getIsNewComponent() && releasedOperaion){
+			releasedOperaion = false;
+			innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().remove(source);
+	    	innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().add(source);
+	    	innerPanel.getTabbedPane().getMainLayeredPanel().revalidate();
+	    	System.out.println("Moving Component in Grid");
+		}
+		
+    	onGrid = innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().getComponents();
     	
     	for(int i = 0; i < onGrid.length; i++ ){
     		type = onGrid[i].toString();
@@ -347,16 +396,5 @@ public class ComponentMover extends MouseAdapter
 			}
 		}
 	}
-	
-	@Override 
-	public void mouseEntered(MouseEvent e){
 		
-	}
-	
-	@Override 
-	public void mouseExited(MouseEvent e){
-		
-	}
-	
-	
 }

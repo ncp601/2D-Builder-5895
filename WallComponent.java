@@ -15,6 +15,7 @@ public class WallComponent extends FloorComponent{
 	private int xPosition;
 	private int yPosition;
 	private boolean isStackable = false;
+	private boolean isNewComponent;
 	private Dimension size = new Dimension(110, 110);
 	
 	private ComponentMover compMove = new ComponentMover();
@@ -25,6 +26,8 @@ public class WallComponent extends FloorComponent{
         setPreferredSize(size);
 		createComponent();
 		setVisible(true);
+		setMaximumSize(size);
+		setMinimumSize(size);
 	}
 	
 	@Override

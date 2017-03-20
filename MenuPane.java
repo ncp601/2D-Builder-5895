@@ -55,6 +55,8 @@ public class MenuPane extends JPanel{
     private FloorComponent currentComponent;
     private Boolean componentSet = false;
     
+    private InnerPanel innerPanel;
+    
     public MenuPane(TabbedPane tab) {
     	
     	this.tabbedPane = tab;
@@ -102,7 +104,7 @@ public class MenuPane extends JPanel{
         setPreferredSize(new Dimension(300, 700));
         setMinimumSize(new Dimension(0, 0));
         setLayout(new CardLayout());
-
+        
         wallsMenuPanel.setMaximumSize(new Dimension(300, 700));
 
       //Creates the first header on the main menu
@@ -526,7 +528,30 @@ public class MenuPane extends JPanel{
           });
           
         add(garageMenuPanel, "GARAGE");
-    	  
+        
+        addMouseListener(new MouseAdapter(){
+			@Override 
+			public void mouseEntered(MouseEvent e){
+				if(e.getSource() instanceof MenuPane){
+					System.out.println("Entered the MenuPane");
+					if(e.getSource() instanceof FloorComponent){
+						innerPanel = InnerPanel.getInstance();
+						System.out.println("Component on the MenuPane");
+						innerPanel.setInMenuPane(true);
+					}
+				}		
+			}
+			
+			@Override 
+			public void mouseExited(MouseEvent e){
+				if((e.getSource() instanceof MenuPane)){
+					innerPanel = InnerPanel.getInstance();
+					System.out.println("Exited the MenuPane");
+					innerPanel.setInMenuPane(false);
+				}	
+			}               
+	    });
+        
 //        addMouseListener(new MouseAdapter(){
 //            @Override
 //          public void mousePressed(MouseEvent evt){

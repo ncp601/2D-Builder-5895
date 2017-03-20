@@ -21,7 +21,6 @@ public class TabbedPane {
     private int tabCounter = 1;
 	private TabButton removeButton;
 	
-	
 	public TabbedPane() {
 		
 	//Creates floorTabPanel
@@ -87,7 +86,8 @@ public class TabbedPane {
 	//Removes all the current tabs and adds the default 
 	public void removeAll(){
 		for(int i = floorTabPanel.getTabCount(); i > 1  ; i--){
-			floorTabPanel.remove(i-2);			
+			floorTabPanel.remove(i-2);
+			mainLayeredPanel.getGlassPanel().removeAll();
 		}
 		tabCounter = floorTabPanel.getTabCount();
 

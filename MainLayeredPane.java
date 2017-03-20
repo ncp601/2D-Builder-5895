@@ -1,9 +1,12 @@
 package Frame;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.*;
 
-public class MainLayeredPane extends JLayeredPane /*implements MouseListener, MouseMotionListener*/{
+public class MainLayeredPane extends JLayeredPane {
 
     /**
 	 * 
@@ -13,18 +16,21 @@ public class MainLayeredPane extends JLayeredPane /*implements MouseListener, Mo
 	private JPanel glassPanel;
     private Grid gridPanel;
 	
+    private InnerPanel innerPanel;
+    
     private Dimension size = new Dimension(1050, 600);
     
 	public MainLayeredPane(){
 		
 	    setOpaque(true);
+	    setVisible(true);
 
 	  //------------------------------------------------------------------------------
-	        
+	    
 	  //Creates the glassPanel layer that will lay on top of the canvas and act as the drag layer
 	    glassPanel = new JPanel();
-	    glassPanel.setBackground(new Color(0, 0, 0, 0));
-	    glassPanel.setOpaque(true);
+	    glassPanel.setBackground(new Color(0, 0, 0));
+	    glassPanel.setOpaque(false);
 	    glassPanel.setPreferredSize(size);
 	    
 	  //------------------------------------------------------------------------------
@@ -67,6 +73,30 @@ public class MainLayeredPane extends JLayeredPane /*implements MouseListener, Mo
 	        .addGroup(mainLayeredPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
 	            .addComponent(gridPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE))
 	    );
+	    
+	    addMouseListener(new MouseAdapter(){
+			@Override 
+			public void mouseEntered(MouseEvent e){			
+				if(e.getSource() instanceof MainLayeredPane){
+					System.out.println("Entered the MainLayeredPane");
+					if(e.getSource() instanceof FloorComponent){
+						innerPanel = InnerPanel.getInstance();
+						System.out.println("Component on the MainLayeredPane");
+						innerPanel.setInMainLayeredPane(true);
+					}
+				}
+			}
+			
+			@Override 
+			public void mouseExited(MouseEvent e){
+				if((e.getSource() instanceof MainLayeredPane)){
+					innerPanel = InnerPanel.getInstance();
+					System.out.println("Exited the MainLayeredPane");
+					innerPanel.setInMainLayeredPane(false);
+				}
+			}               
+	    });
+	    
 	}
 	
 	public void addToGlassPane(Component c){
@@ -77,6 +107,8 @@ public class MainLayeredPane extends JLayeredPane /*implements MouseListener, Mo
 		return glassPanel;
 	}
 }
+
+	
 
 
 
