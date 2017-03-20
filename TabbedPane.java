@@ -17,7 +17,7 @@ public class TabbedPane {
 	// Variables declaration                  
     private JButton addTabButton;
     private JTabbedPane floorTabPanel;
-//    public MainLayeredPane mainLayeredPanel;
+    public MainLayeredPane mainLayeredPanel;
 	//private TabButton removeButton;
 	
 	private int tabNumber = 0;
@@ -34,13 +34,13 @@ public class TabbedPane {
   //------------------------------------------------------------------------------
     
     //Creates mainLayeredPanel inside of the floorTabPanel
-//    mainLayeredPanel = new MainLayeredPane(tabNumber);
+    mainLayeredPanel = new MainLayeredPane(tabNumber);
 
     //Adds the mainLayeredPanel to the floorTabPanel
 //    removeButton = new TabButton();
 //	mainLayeredPanel.add(removeButton);
 	
-    floorTabPanel.addTab("Floor 1", new MainLayeredPane(tabNumber) );
+    floorTabPanel.addTab("Floor 1", mainLayeredPanel);
 
   //------------------------------------------------------------------------------
 
@@ -66,6 +66,9 @@ public class TabbedPane {
 		return floorTabPanel;
 	}
 	
+	public MainLayeredPane getMainLayeredPanel(){
+    	return mainLayeredPanel;
+    }
 	
 	private void insertTab(){
 		//innerPanel = InnerPanel.getInstance();
@@ -92,11 +95,83 @@ public class TabbedPane {
 	public void removeAll(){
 		for(int i = floorTabPanel.getTabCount(); i > 1  ; i--){
 			floorTabPanel.remove(i-2);
+			mainLayeredPanel.getGlassPanel().removeAll();
 		}
 		tabNumber = floorTabPanel.getTabCount();
 		insertTab();
 	}
 	
-
+	
+//	private class TabButton extends JButton implements ActionListener {
+//		
+//	    public TabButton() {
+//	        int size = 17;
+//	        setPreferredSize(new Dimension(size, size));
+//	        setToolTipText("close this tab");
+//	        //Make the button looks the same for all Laf's
+//	        setUI(new BasicButtonUI());
+//	        //Make it transparent
+//	        setContentAreaFilled(false);
+//	        //No need to be focusable
+//	        setFocusable(false);
+//	        setBorder(BorderFactory.createEtchedBorder());
+//	        setBorderPainted(false);
+//	        //Making nice rollover effect
+//	        //we use the same listener for all buttons
+//	        addMouseListener(buttonMouseListener);
+//	        setRolloverEnabled(true);
+//	        //Close the proper tab by clicking the button
+//	        addActionListener(this);
+//	    }
+//	    
+//
+//	    public void actionPerformed(ActionEvent e) {
+//	        int i = floorTabPanel.indexOfTabComponent(floorTabPanel);
+//	        if (i != -1) {
+//	            floorTabPanel.remove(i);
+//	        }
+//	    }
+//
+//	    //we don't want to update UI for this button
+//	    public void updateUI() {
+//	    }
+//
+//	    //paint the cross
+//	    protected void paintComponent(Graphics g) {
+//	        super.paintComponent(g);
+//	        Graphics2D g2 = (Graphics2D) g.create();
+//	        //shift the image for pressed buttons
+//	        if (getModel().isPressed()) {
+//	            g2.translate(1, 1);
+//	        }
+//	        g2.setStroke(new BasicStroke(2));
+//	        g2.setColor(Color.BLACK);
+//	        if (getModel().isRollover()) {
+//	            g2.setColor(Color.MAGENTA);
+//	        }
+//	        int delta = 6;
+//	        g2.drawLine(delta, delta, getWidth() - delta - 1, getHeight() - delta - 1);
+//	        g2.drawLine(getWidth() - delta - 1, delta, delta, getHeight() - delta - 1);
+//	        g2.dispose();
+//	    }
+//	}
+//
+//	private final static MouseListener buttonMouseListener = new MouseAdapter() {
+//	    public void mouseEntered(MouseEvent e) {
+//	        Component component = e.getComponent();
+//	        if (component instanceof AbstractButton) {
+//	            AbstractButton button = (AbstractButton) component;
+//	            button.setBorderPainted(true);
+//	        }
+//	    }
+//
+//	    public void mouseExited(MouseEvent e) {
+//	        Component component = e.getComponent();
+//	        if (component instanceof AbstractButton) {
+//	            AbstractButton button = (AbstractButton) component;
+//	            button.setBorderPainted(false);
+//	        }
+//	    }
+//	};
 
 }
