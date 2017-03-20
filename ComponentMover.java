@@ -17,6 +17,7 @@ public class ComponentMover extends MouseAdapter
 
 	private Point pressed;
 	private Point location;
+	private Point releaseLocation;
 
 	private Cursor originalCursor;
 	private boolean autoscrolls;
@@ -37,6 +38,7 @@ public class ComponentMover extends MouseAdapter
     
 	private boolean pressedOperation;
 	private boolean releasedOperaion;
+	private boolean releasedOperationInside;
 	
     private Dimension componentSize = new Dimension(110, 110);
     
@@ -338,30 +340,55 @@ public class ComponentMover extends MouseAdapter
 		
 		innerPanel = InnerPanel.getInstance();
 		releasedOperaion = true;
+		releasedOperationInside = true;
+		
+		releaseLocation = e.getLocationOnScreen();
+		System.out.println(releaseLocation);
 		
 		if (!potentialDrag) return;
 		
 		innerContentPanel = innerPanel.getGUI();
 		
 		if(!(innerPanel.getInMainLayeredPane()) && !(currentComponent.getIsNewComponent()) && releasedOperaion){
-			releasedOperaion = false;
-			newComponent.setIsNewComponent(true);
-			releasedOperaion = false;
-			innerPanel.getMenuPane().revalidate();
-			innerContentPanel.remove(newComponent);
-			newComponent.setSize(componentSize);
-	    	innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().add(newComponent);
-	    	newComponent.setLocation(source.getX() - 220, source.getY());
-	    	innerPanel.getTabbedPane().getMainLayeredPanel().revalidate();
-	    	System.out.println("Adding Component to Grid");
+			if((releaseLocation.x < 1260 && releaseLocation.x > 220) && (releaseLocation.y < 720 && releaseLocation.y > 110)  && releasedOperationInside){
+				newComponent.setIsNewComponent(true);
+				releasedOperaion = false;
+				innerPanel.getMenuPane().revalidate();
+				innerContentPanel.remove(newComponent);
+				newComponent.setSize(componentSize);
+		    	innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().add(newComponent);
+		    	newComponent.setLocation(source.getX() - 220, source.getY());
+		    	innerPanel.getTabbedPane().getMainLayeredPanel().revalidate();
+		    	System.out.println("Adding Component to Grid");
+			}
+			
+			else {
+				innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().remove(newComponent);
+				System.out.println("Couldn't add component - Out of bounds");
+				innerPanel.getTabbedPane().getMainLayeredPanel().revalidate();
+		    	innerPanel.getTabbedPane().getMainLayeredPanel().repaint();
+			}
 		}
 		
 		if(!(innerPanel.getInMenuPane()) && currentComponent.getIsNewComponent() && releasedOperaion){
-			releasedOperaion = false;
-			innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().remove(source);
-	    	innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().add(source);
-	    	innerPanel.getTabbedPane().getMainLayeredPanel().revalidate();
-	    	System.out.println("Moving Component in Grid");
+			if((releaseLocation.x < 1260 && releaseLocation.x > 220) && (releaseLocation.y < 720 && releaseLocation.y > 110)  && releasedOperationInside){
+				releasedOperaion = false;
+				releasedOperationInside = false;
+				innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().remove(source);
+				innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().add(source);
+		    	innerPanel.getTabbedPane().getMainLayeredPanel().revalidate();
+		    	innerPanel.getTabbedPane().getMainLayeredPanel().repaint();
+		    	System.out.println("Component inside of the grid");	
+			}
+			
+	    	if((releaseLocation.x > 1260 | releaseLocation.x < 220) | (releaseLocation.y > 720 | releaseLocation.y < 110) && releasedOperationInside){
+	    		releasedOperationInside = false;
+	    		releasedOperaion = false;
+	    		innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().remove(source);
+	    		innerPanel.getTabbedPane().getMainLayeredPanel().revalidate();
+		    	innerPanel.getTabbedPane().getMainLayeredPanel().repaint();
+		    	System.out.println("Component outside of the grid");	
+	    	}
 		}
 		
     	onGrid = innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().getComponents();
