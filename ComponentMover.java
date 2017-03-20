@@ -209,7 +209,7 @@ public class ComponentMover extends MouseAdapter
 				
 				innerPanel.getMenuPane().repaint();
 		    	innerPanel.getGUI().revalidate();
-		    	System.out.println("Adding newComponent");
+		    	System.out.println("Add Operation");
 			}
 				
 			if(!(innerPanel.getInMenuPane()) && currentComponent.getIsNewComponent() && pressedOperation){
@@ -223,7 +223,7 @@ public class ComponentMover extends MouseAdapter
 				
 				innerPanel.getMenuPane().repaint();
 		    	innerPanel.getGUI().revalidate();
-		    	System.out.println("Moving Component");
+		    	System.out.println("Moving Operation");
 			}
 			
 			else {

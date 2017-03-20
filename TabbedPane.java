@@ -18,8 +18,11 @@ public class TabbedPane {
     private JButton addTabButton;
     protected JTabbedPane floorTabPanel;
     public MainLayeredPane mainLayeredPanel;
-    private int tabCounter = 1;
 	private TabButton removeButton;
+	
+	private int tabNumber = 0;
+	
+	private InnerPanel innerPanel;
 	
 	public TabbedPane() {
 		
@@ -31,7 +34,7 @@ public class TabbedPane {
   //------------------------------------------------------------------------------
     
     //Creates mainLayeredPanel inside of the floorTabPanel
-    mainLayeredPanel = new MainLayeredPane();
+    mainLayeredPanel = new MainLayeredPane(tabNumber);
 
   //Adds the mainLayeredPanel to the floorTabPanel
     removeButton = new TabButton();
@@ -68,17 +71,22 @@ public class TabbedPane {
     }
 	
 	private void insertTab(){
-		String title = "Floor " + String.valueOf (floorTabPanel.getTabCount ());
-	    
-	    if (tabCounter >= 0 && tabCounter < 100) {
+		//innerPanel = InnerPanel.getInstance();
+		tabNumber++;
+		String title = "Floor " + String.valueOf (floorTabPanel.getTabCount());
+	    System.out.println(title);
+	    if (tabNumber >= 0 && tabNumber < 17) {
 	        JPanel pnl = new JPanel();
 	        pnl.setOpaque(false);
-			floorTabPanel.insertTab(title, null, new MainLayeredPane(), "", floorTabPanel.getTabCount() - 1 );
+			floorTabPanel.insertTab(title, null, new MainLayeredPane(tabNumber), "", floorTabPanel.getTabCount() - 1 );
 	        pnl.add(addTabButton);
 	        floorTabPanel.setTabComponentAt(floorTabPanel.getTabCount() - 1, pnl);
 	        floorTabPanel.setSelectedIndex(floorTabPanel.getTabCount() - 2);
 	        floorTabPanel.setEnabledAt(floorTabPanel.getTabCount()-1, false);	    	
-		    tabCounter++;  
+	    }
+	    
+	    else {
+	    	return;
 	    }
 	   
     }
@@ -89,7 +97,7 @@ public class TabbedPane {
 			floorTabPanel.remove(i-2);
 			mainLayeredPanel.getGlassPanel().removeAll();
 		}
-		tabCounter = floorTabPanel.getTabCount();
+		tabNumber = floorTabPanel.getTabCount();
 
 		insertTab();
 	}

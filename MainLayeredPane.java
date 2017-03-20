@@ -16,11 +16,15 @@ public class MainLayeredPane extends JLayeredPane {
 	private JPanel glassPanel;
     private Grid gridPanel;
 	
+    private int tabNumber = 0;
+    
     private InnerPanel innerPanel;
     
     private Dimension size = new Dimension(1050, 600);
     
-	public MainLayeredPane(){
+	public MainLayeredPane(int num){
+		
+		this.tabNumber = num;
 		
 	    setOpaque(true);
 	    setVisible(true);
