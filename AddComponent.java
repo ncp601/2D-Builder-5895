@@ -25,7 +25,7 @@ public class AddComponent implements ComponentCommands {
 	
 	@Override 
 	public void undo(){
-		
+		compR.deleteComponent(currentLabel, currentLocation);
 	}
 	
 	@Override 

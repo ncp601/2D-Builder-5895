@@ -23,12 +23,12 @@ public class DeleteComponent implements ComponentCommands {
 	
 	@Override 
 	public void undo(){
-		//TODO 
+		
 	}
 	
 	@Override 
 	public void redo(){
-		//TODO 
+		 
 	}
 	
 }

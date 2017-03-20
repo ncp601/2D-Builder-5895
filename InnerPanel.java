@@ -21,8 +21,9 @@ public class InnerPanel {
 	
 	private Dimension size = new Dimension(1260, 680);
 	
-	private ComponentManager compM = new ComponentManager();
-    private ComponentReceiver compR = new ComponentReceiver();
+	private ComponentManager compM;
+    private ComponentReceiver compR;
+    
 	private ComponentMover compMove = new ComponentMover();
 	
 	private static InnerPanel instance = null;
@@ -34,6 +35,9 @@ public class InnerPanel {
 		innerContentPanel  = new JLayeredPane();
 	    leftMenuHeaderPanel = new JPanel();
 	    overallHeaderLabel = new JLabel();
+	    
+	    compM = new ComponentManager();
+	    compR = new ComponentReceiver();
 	    
 	    innerContentPanel.addMouseListener(compMove);
 	    innerContentPanel.addMouseMotionListener(compMove);

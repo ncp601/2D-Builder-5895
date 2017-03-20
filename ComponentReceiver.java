@@ -17,7 +17,9 @@ public class ComponentReceiver {
 		currentComponent.setSize(componentSize);
     	innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().add(currentComponent);
     	currentComponent.setLocation(sourceComponent.getX() - 220, sourceComponent.getY());
+    	currentComponent.setVisible(true);
     	innerPanel.getTabbedPane().getMainLayeredPanel().revalidate();
+    	innerPanel.getTabbedPane().getMainLayeredPanel().repaint();
 	}
 	
 	public void moveComponent(Component currentComponent, Point currentLocation){
@@ -34,6 +36,10 @@ public class ComponentReceiver {
 		innerPanel.getTabbedPane().getMainLayeredPanel().getGlassPanel().remove(currentComponent);
 		innerPanel.getTabbedPane().getMainLayeredPanel().revalidate();
     	innerPanel.getTabbedPane().getMainLayeredPanel().repaint();
+	}
+	
+	public void clearComponent() {
+		
 	}
 	
 	
