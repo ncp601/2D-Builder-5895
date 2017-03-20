@@ -16,6 +16,9 @@ public class ToolBarPane {
     private JButton newFloorPlanButton;
     private JButton saveFloorPlanButton;
     private JButton loadFloorPlanButton;
+    private JButton undoButton;
+    private JButton redoButton;
+    private JButton clearButton;
    
     private ToolBarReceiver tbR = new ToolBarReceiver();
     private ToolBarManager tbM = new ToolBarManager();
@@ -39,6 +42,9 @@ public class ToolBarPane {
         newFloorPlanButton = new JButton();
         loadFloorPlanButton = new JButton();
         saveFloorPlanButton = new JButton();
+        undoButton = new JButton();
+        redoButton = new JButton();
+        clearButton = new JButton();
         
 	      //Creates the topToolbar toolbar
 	        topToolBar.setFloatable(false);
@@ -91,10 +97,58 @@ public class ToolBarPane {
 	                saveFloorPlanButtonActionPerformed(evt);
 	            }
 	        });
-	        
+
 	      //Adds the saveFloorPlanButton to the toolbar
 	        topToolBar.add(saveFloorPlanButton);
 
+	      //Creates the undo button 
+	        undoButton.setText("Undo");
+	        undoButton.setFocusable(false);
+	        undoButton.setHorizontalTextPosition(SwingConstants.CENTER);
+	        undoButton.setMaximumSize(new Dimension(50, 40));
+	        undoButton.setMinimumSize(new Dimension(29, 30));
+	        undoButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+	        undoButton.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent evt) {
+	            	undoButtonActionPerformed(evt);
+	            }
+	        });
+	        
+	      //Adds the undo button to the toolbar
+	        topToolBar.add(undoButton);
+	        
+	      //Creates the redo button 
+	        redoButton.setText("Redo");
+	        redoButton.setFocusable(false);
+	        redoButton.setHorizontalTextPosition(SwingConstants.CENTER);
+	        redoButton.setMaximumSize(new Dimension(50, 40));
+	        redoButton.setMinimumSize(new Dimension(29, 30));
+	        redoButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+	        redoButton.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent evt) {
+	            	redoButtonActionPerformed(evt);
+	            }
+	        });
+	        
+	      //Adds the redo button to the toolbar
+	        topToolBar.add(redoButton);
+	        
+	      //Creates the clear button 
+	        clearButton.setText("Clear");
+	        clearButton.setFocusable(false);
+	        clearButton.setHorizontalTextPosition(SwingConstants.CENTER);
+	        clearButton.setMaximumSize(new Dimension(50, 40));
+	        clearButton.setMinimumSize(new Dimension(29, 30));
+	        clearButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+	        clearButton.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent evt) {
+	            	clearButtonActionPerformed(evt);
+	            }
+	        });
+	        
+	      //Adds the clear button to the toolbar
+	        topToolBar.add(clearButton);
+	        
 	      //------------------------------------------------------------------------------
 	        
 	      //Creates the layouts for the toolbarPanel
@@ -127,15 +181,27 @@ public class ToolBarPane {
         // TODO 
     }                                                   
 
+    private void loadFloorPlanButtonActionPerformed(ActionEvent evt) {                                                    
+        // TODO 
+    }
+    
     private void newFloorPlanButtonActionPerformed(ActionEvent evt) {    
     	innerPanel = InnerPanel.getInstance();
     	currentTabbedPane = innerPanel.getTabbedPane();
     	newPlan = new NewCommand(tbR ,currentTabbedPane);
     	tbM.doCurrentCommand(newPlan);
-    }                                                  
-
-    private void loadFloorPlanButtonActionPerformed(ActionEvent evt) {                                                    
-        // TODO 
-    }    
+    }                                                      
 	
+    private void undoButtonActionPerformed(ActionEvent evt) {                                                    
+    	innerPanel.getComponentManager().undo(); 
+    } 
+    
+    private void redoButtonActionPerformed(ActionEvent evt) {                                                    
+    	innerPanel.getComponentManager().redo();
+    } 
+    
+    private void clearButtonActionPerformed(ActionEvent evt) {                                                    
+        // TODO 
+    } 
+    
 }

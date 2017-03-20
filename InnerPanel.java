@@ -21,6 +21,8 @@ public class InnerPanel {
 	
 	private Dimension size = new Dimension(1260, 680);
 	
+	private ComponentManager compM = new ComponentManager();
+    private ComponentReceiver compR = new ComponentReceiver();
 	private ComponentMover compMove = new ComponentMover();
 	
 	private static InnerPanel instance = null;
@@ -134,6 +136,14 @@ public class InnerPanel {
 	
 	public boolean getCreateComponent(){
 		return createComponent;
+	}
+	
+	public ComponentManager getComponentManager(){
+		return compM;
+	}
+	
+	public ComponentReceiver getComponentReceiver(){
+		return compR;
 	}
 	
 	//------------------------------------------------------------------------------------------------

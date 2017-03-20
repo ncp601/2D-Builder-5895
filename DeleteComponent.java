@@ -1,20 +1,24 @@
 package Frame;
 
+import java.awt.*;
+
 import javax.swing.JLabel;
 
 public class DeleteComponent implements ComponentCommands {
 
 	ComponentReceiver compR;
-	FloorComponent currentLabel;
+	Component currentLabel;
+	Point currentLocation;
 	
-	public DeleteComponent(ComponentReceiver r, FloorComponent l){
+	public DeleteComponent(ComponentReceiver r, Component c, Point l){
 		this.compR = r;
-		this.currentLabel = l;
+		this.currentLabel = c;
+		this.currentLocation = l;
 	}
 	
 	@Override 
 	public void execute(){
-		compR.deleteComponent();
+		compR.deleteComponent(currentLabel, currentLocation);
 	}
 	
 	@Override 

@@ -1,31 +1,34 @@
 package Frame;
 
+import java.awt.*;
+
 import javax.swing.*;
 
 public class MoveComponent implements ComponentCommands {
 
 	ComponentReceiver compR;
-	FloorComponent currentLabel;
+	Component currentLabel;
+	Point currentLocation;
 	
-	
-	public MoveComponent(ComponentReceiver r, FloorComponent l){
+	public MoveComponent(ComponentReceiver r, Component c, Point l){
 		this.compR = r;
-		this.currentLabel = l;
+		this.currentLabel = c;
+		this.currentLocation = l;
 	}
 	
 	@Override 
 	public void execute(){
-		compR.moveComponent();
+		compR.moveComponent(currentLabel, currentLocation);
 	}
 	
 	@Override 
 	public void undo(){
-		//TODO  
+		  
 	}
 	
 	@Override 
 	public void redo(){
-		//TODO 
+		compR.moveComponent(currentLabel, currentLocation); 
 	}
 	
 }

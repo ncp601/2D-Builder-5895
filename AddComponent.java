@@ -1,29 +1,36 @@
 package Frame;
 
+import java.awt.*;
 import javax.swing.*;
+
 
 public class AddComponent implements ComponentCommands {
 	
 	ComponentReceiver compR;
 	FloorComponent currentLabel;
+	Component source;
+	Point currentLocation;
 	
-	public AddComponent(ComponentReceiver r, FloorComponent l) {
-		this.currentLabel = l;
+	public AddComponent(ComponentReceiver r, Component s, FloorComponent c, Point l) {
+		this.compR = r;
+		this.currentLabel = c;
+		this.source = s;
+		this.currentLocation = l;
 	}
 	
 	@Override 
 	public void execute(){
-		compR.addComponent(currentLabel);
+		compR.addComponent(currentLabel, source,  currentLocation);
 	}
 	
 	@Override 
 	public void undo(){
-		//TODO 
+		
 	}
 	
 	@Override 
 	public void redo(){
-		//TODO 
+		compR.addComponent(currentLabel, source,  currentLocation);
 	}
 	
 }
