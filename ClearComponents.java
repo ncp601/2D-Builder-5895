@@ -9,24 +9,26 @@ public class ClearComponents implements ComponentCommands {
 	ComponentReceiver compR;
 	Component currentLabel;
 	Point currentLocation;
+	InnerPanel innerPanel;
 	
 	public ClearComponents(){
-
+		innerPanel = InnerPanel.getInstance();
+		compR = innerPanel.getComponentReceiver();
 	}
 	
 	@Override 
 	public void execute(){
-		compR.clearComponent();
+		compR.clearComponents();
 	}
 	
 	@Override 
 	public void undo(){
-		  
+		compR.unClearComponents();
 	}
 	
 	@Override 
 	public void redo(){
-		compR.clearComponent(); 
+		compR.clearComponents(); 
 	}
 	
 }

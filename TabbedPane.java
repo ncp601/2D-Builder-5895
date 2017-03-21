@@ -17,8 +17,6 @@ public class TabbedPane {
 	// Variables declaration                  
     private JButton addTabButton;
     private JTabbedPane floorTabPanel;
-//    public MainLayeredPane mainLayeredPanel;
-	//private TabButton removeButton;
 	
 	private int tabNumber = 0;
 	
@@ -32,14 +30,8 @@ public class TabbedPane {
     floorTabPanel.setFocusable(false);
 
   //------------------------------------------------------------------------------
-    
-    //Creates mainLayeredPanel inside of the floorTabPanel
-//    mainLayeredPanel = new MainLayeredPane(tabNumber);
-
-    //Adds the mainLayeredPanel to the floorTabPanel
-//    removeButton = new TabButton();
-//	mainLayeredPanel.add(removeButton);
 	
+    //Adds the initial floor to the tab panel 
     floorTabPanel.addTab("Floor 1", new MainLayeredPane(tabNumber) );
 
   //------------------------------------------------------------------------------

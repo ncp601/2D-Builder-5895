@@ -13,6 +13,7 @@ public class InnerPanel {
 	private JLayeredPane innerContentPanel;
 	private TabbedPane tabbedPane;
 	private MenuPane menuPane;
+	private MainLayeredPane currentLayeredPane;
 	
 	private boolean inMenuPane;
 	private boolean inMainLayeredPane;
@@ -25,6 +26,8 @@ public class InnerPanel {
     private ComponentReceiver compR;
     
 	private ComponentMover compMove = new ComponentMover();
+	
+	private Component[] onGrid;
 	
 	private static InnerPanel instance = null;
 	
@@ -150,6 +153,10 @@ public class InnerPanel {
 		return compR;
 	}
 	
+	public Component[] getOnGrid(){
+		return onGrid;
+	}
+	
 	//------------------------------------------------------------------------------------------------
 	
 	public void setInMenuPane(Boolean m){
@@ -166,6 +173,10 @@ public class InnerPanel {
 	
 	public void setCreateComponent(Boolean m){
 		createComponent = m;
+	}
+	
+	public void setOnGrid(Component[] c){
+		onGrid = c;
 	}
 	
 	//------------------------------------------------------------------------------------------------

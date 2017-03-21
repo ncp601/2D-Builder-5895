@@ -252,6 +252,7 @@ public class ComponentMover extends MouseAdapter
 		}
 		
 		onGrid = selectedTab.getGlassPanel().getComponents();
+		innerPanel.setOnGrid(onGrid);
 		
     	for(int i = 0; i < onGrid.length; i++ ){
     		type = onGrid[i].toString();
