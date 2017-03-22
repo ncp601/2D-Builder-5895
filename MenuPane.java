@@ -48,9 +48,18 @@ public class MenuPane extends JPanel{
     private JPanel windowsMenuPanel; 
     
     private TabbedPane tabbedPane;
+    
     private AbstractFloorComponentFactory wallFactory;
     private AbstractFloorComponentFactory windowFactory;
     private AbstractFloorComponentFactory doorFactory;
+    private AbstractFloorComponentFactory stairsFactory;
+    private AbstractFloorComponentFactory elevatorFactory;
+    private AbstractFloorComponentFactory flooringFactory;
+    private AbstractFloorComponentFactory dinningRoomFactory;
+    private AbstractFloorComponentFactory bedroomFactory;
+    private AbstractFloorComponentFactory bathroomFactory;
+    private AbstractFloorComponentFactory laundryFactory;
+    private AbstractFloorComponentFactory garageFactory;
     
     private String type = "";
     private FloorComponent fillLabel;
@@ -338,6 +347,14 @@ public class MenuPane extends JPanel{
         wallFactory = FloorComponentFactoryProducer.getFactory("WALL");
         windowFactory = FloorComponentFactoryProducer.getFactory("WINDOW");
         doorFactory = FloorComponentFactoryProducer.getFactory("DOOR");
+        stairsFactory = FloorComponentFactoryProducer.getFactory("STAIRS");
+        elevatorFactory = FloorComponentFactoryProducer.getFactory("ELEVATOR");
+        flooringFactory = FloorComponentFactoryProducer.getFactory("FLOORING");
+        dinningRoomFactory = FloorComponentFactoryProducer.getFactory("DINNINGROOM");
+        bedroomFactory = FloorComponentFactoryProducer.getFactory("BEDROOM");
+        bathroomFactory = FloorComponentFactoryProducer.getFactory("BATHROOM");
+        laundryFactory = FloorComponentFactoryProducer.getFactory("LAUNDRY");
+        garageFactory = FloorComponentFactoryProducer.getFactory("GARAGE");
         
       //------------------------------------------------------------------------------
         
