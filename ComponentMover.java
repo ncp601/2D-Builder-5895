@@ -23,8 +23,11 @@ public class ComponentMover extends MouseAdapter
 	private boolean autoscrolls;
 	private boolean potentialDrag;
 
+	private AbstractFloorComponentFactory wallFactory = FloorComponentFactoryProducer.getFactory("WALL");
+    private AbstractFloorComponentFactory windowFactory = FloorComponentFactoryProducer.getFactory("WINDOW");
+    private AbstractFloorComponentFactory doorFactory = FloorComponentFactoryProducer.getFactory("DOOR");
+	
 	private JLayeredPane innerContentPanel;
-    private FloorComponentFactory factory = new FloorComponentFactory();
     private String type = "";
     private FloorComponent newComponent;
     private FloorComponent currentComponent;
@@ -78,7 +81,18 @@ public class ComponentMover extends MouseAdapter
 				currentComponent = (FloorComponent)e.getSource();
 	    		type = currentComponent.getComponentType();
 	    		System.out.println(type);
-		    	newComponent = factory.getComponent(type);
+	    		
+		    	if(wallFactory.getComponent(type) != null){
+		    		newComponent = wallFactory.getComponent(type);
+		    	}
+		    	
+		    	if(windowFactory.getComponent(type) != null){
+		    		newComponent = windowFactory.getComponent(type);
+		    	}
+		    	
+		    	if(doorFactory.getComponent(type) != null){
+		    		newComponent = doorFactory.getComponent(type);
+		    	}
 		    	
 		    	newComponent.setVisible(true);
 		    	

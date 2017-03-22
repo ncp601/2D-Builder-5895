@@ -48,7 +48,10 @@ public class MenuPane extends JPanel{
     private JPanel windowsMenuPanel; 
     
     private TabbedPane tabbedPane;
-    private FloorComponentFactory factory;
+    private AbstractFloorComponentFactory wallFactory;
+    private AbstractFloorComponentFactory windowFactory;
+    private AbstractFloorComponentFactory doorFactory;
+    
     private String type = "";
     private FloorComponent fillLabel;
     private FloorComponent newComponent;
@@ -329,6 +332,15 @@ public class MenuPane extends JPanel{
       //Creates the wallsMenuPanel that will hold wall components 
         wallsMenuPanel.setLayout(g);
                 
+      //------------------------------------------------------------------------------
+        
+      //Assigns the factories for each type of component
+        wallFactory = FloorComponentFactoryProducer.getFactory("WALL");
+        windowFactory = FloorComponentFactoryProducer.getFactory("WINDOW");
+        doorFactory = FloorComponentFactoryProducer.getFactory("DOOR");
+        
+      //------------------------------------------------------------------------------
+        
       //Creates the backButton that will redirect users from the various component tabs back to the main menu
         wallsMenuPanel.add(backButton = new BackButton());
         backButton.addActionListener(new ActionListener() {
@@ -337,11 +349,13 @@ public class MenuPane extends JPanel{
             }
         });
 
-        wallsMenuPanel.add(new WallComponent());
-        wallsMenuPanel.add(new WallComponent());
-        wallsMenuPanel.add(new WallComponent());
-        wallsMenuPanel.add(new WallComponent());
-        wallsMenuPanel.add(new WallComponent());
+        wallsMenuPanel.add(wallFactory.getComponent("WALLHALF"));
+        wallsMenuPanel.add(wallFactory.getComponent("WALL1H"));
+        wallsMenuPanel.add(wallFactory.getComponent("WALL1V"));
+        wallsMenuPanel.add(wallFactory.getComponent("WALL2H"));
+        wallsMenuPanel.add(wallFactory.getComponent("WALL3H"));
+        wallsMenuPanel.add(wallFactory.getComponent("WALL2V"));
+        wallsMenuPanel.add(wallFactory.getComponent("WALL3V"));
         
         add(wallsMenuPanel, "WALLS");
         
@@ -384,14 +398,14 @@ public class MenuPane extends JPanel{
             }
         });
 
-        doorsMenuPanel.add(new DoorComponent());
-        doorsMenuPanel.add(new DoorComponent());
-        doorsMenuPanel.add(new DoorComponent());
-        doorsMenuPanel.add(new DoorComponent());
-        doorsMenuPanel.add(new DoorComponent());
-        doorsMenuPanel.add(new DoorComponent());
-        doorsMenuPanel.add(new DoorComponent());
-        doorsMenuPanel.add(new DoorComponent());
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFDOL"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFDOR"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFLOL"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFLOR"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFROL"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFROR"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFUOL"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFUOR"));
         
         add(doorsMenuPanel, "DOORS");
 
@@ -419,10 +433,10 @@ public class MenuPane extends JPanel{
             }
         });
         
-        windowsMenuPanel.add(new WindowComponent());
-        windowsMenuPanel.add(new WindowComponent());
-        windowsMenuPanel.add(new WindowComponent());
-        windowsMenuPanel.add(new WindowComponent());
+        windowsMenuPanel.add(windowFactory.getComponent("WINDOW2H"));
+        windowsMenuPanel.add(windowFactory.getComponent("WINDOW3H"));
+        windowsMenuPanel.add(windowFactory.getComponent("WINDOW2V"));
+        windowsMenuPanel.add(windowFactory.getComponent("WINDOW3V"));
         
         add(windowsMenuPanel, "WINDOWS");
 
