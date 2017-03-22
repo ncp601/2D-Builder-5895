@@ -4,35 +4,34 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class WallComponentOneBlockVertical extends FloorComponent{
+public class DoorComponentFacingRightOpenRight extends FloorComponent{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	final private String componentType = "WALL1V";
+	final private String componentType = "DOORFROR";
 	private int xPosition;
 	private int yPosition;
 	private boolean isStackable = false;
-	private boolean isNewComponent;
 	private Dimension size = new Dimension(110, 110);
 	
 	private ComponentMover compMove = new ComponentMover();
 	
-	public WallComponentOneBlockVertical(){
-        addMouseListener(compMove);
+	public DoorComponentFacingRightOpenRight(){
+		addMouseListener(compMove);
         addMouseMotionListener(compMove);
         setPreferredSize(size);
-		createComponent();
-		setVisible(true);
+        createComponent();
+        setVisible(true);
 		setMaximumSize(size);
 		setMinimumSize(size);
 	}
 	
 	@Override
 	public void createComponent(){
-		ImageIcon image = new ImageIcon("oneBlockWallVertical.png");
+		ImageIcon image = new ImageIcon("doorFacingRightOpenRight.png");
 		setIcon(image);
 	}
 	
