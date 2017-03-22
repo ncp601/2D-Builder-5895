@@ -32,10 +32,6 @@ public class ToolBarPane {
     
     private InnerPanel innerPanel;
     
-    //tbM.doCurrentCommand(tbR, newPlan);
-    //tbM.doCurrentCommand(tbR, loadPlan);
-    //tbM.doCurrentCommand(tbR, savePlan);
-    
 	public ToolBarPane(){
 		
 		toolbarPanel = new JPanel();

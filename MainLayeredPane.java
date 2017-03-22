@@ -18,6 +18,9 @@ public class MainLayeredPane extends JLayeredPane {
 	
     private int tabNumber = 0;
     
+    private ComponentManager compM;
+    private ComponentReceiver compR;
+    
     private InnerPanel innerPanel;
     
     private Dimension size = new Dimension(1050, 600);
@@ -29,7 +32,13 @@ public class MainLayeredPane extends JLayeredPane {
 	    setOpaque(true);
 	    setVisible(true);
 
-	  //------------------------------------------------------------------------------
+	 //------------------------------------------------------------------------------
+	    
+	  //Creates the Command pattern for each floor
+	    compM = new ComponentManager();
+	    compR = new ComponentReceiver();
+	    
+	 //------------------------------------------------------------------------------
 	    
 	  //Creates the glassPanel layer that will lay on top of the canvas and act as the drag layer
 	    glassPanel = new JPanel();
@@ -37,13 +46,13 @@ public class MainLayeredPane extends JLayeredPane {
 	    glassPanel.setOpaque(false);
 	    glassPanel.setPreferredSize(size);
 	    
-	  //------------------------------------------------------------------------------
+	 //------------------------------------------------------------------------------
 	    
 	  //Creates the gridPanel that will represent the grid under the glassPanel
 	    gridPanel = new Grid();
 	    gridPanel.setPreferredSize(size);
 	    
-	  //------------------------------------------------------------------------------  
+	 //------------------------------------------------------------------------------  
 	    
 	  //Creates the layouts for the mainLayeredPanel and the glassPanel 
 	    GroupLayout glassPanelLayout = new GroupLayout(glassPanel);
@@ -78,6 +87,8 @@ public class MainLayeredPane extends JLayeredPane {
 	            .addComponent(gridPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE))
 	    );
 	    
+	 //------------------------------------------------------------------------------
+	    
 	    addMouseListener(new MouseAdapter(){
 			@Override 
 			public void mouseEntered(MouseEvent e){			
@@ -101,7 +112,21 @@ public class MainLayeredPane extends JLayeredPane {
 			}               
 	    });
 	    
+	//------------------------------------------------------------------------------
+	    
 	}
+
+	//------------------------------------------------------------------------------
+	
+	public ComponentManager getComponentManager(){
+		return compM;
+	}
+	
+	public ComponentReceiver getComponentReceiver(){
+		return compR;
+	}
+	
+	//------------------------------------------------------------------------------
 	
 	public void addToGlassPane(Component c){
 		glassPanel.add(c);
@@ -110,6 +135,8 @@ public class MainLayeredPane extends JLayeredPane {
 	public JPanel getGlassPanel(){
 		return glassPanel;
 	}
+	
+	//------------------------------------------------------------------------------
 }
 
 	

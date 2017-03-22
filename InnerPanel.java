@@ -36,8 +36,8 @@ public class InnerPanel {
 	    leftMenuHeaderPanel = new JPanel();
 	    overallHeaderLabel = new JLabel();
 	    
-	    compM = new ComponentManager();
-	    compR = new ComponentReceiver();
+//	    compM = new ComponentManager();
+//	    compR = new ComponentReceiver();
 	    
 	    innerContentPanel.addMouseListener(compMove);
 	    innerContentPanel.addMouseMotionListener(compMove);
@@ -166,6 +166,14 @@ public class InnerPanel {
 	
 	public void setCreateComponent(Boolean m){
 		createComponent = m;
+	}
+	
+	public void setComponentManager(ComponentManager cM){
+		compM = cM;
+	}
+	
+	public void setComponentReceiver(ComponentReceiver cR){
+		compR = cR;
 	}
 	
 	//------------------------------------------------------------------------------------------------

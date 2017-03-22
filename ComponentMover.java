@@ -275,8 +275,8 @@ public class ComponentMover extends MouseAdapter
 			if((releaseLocation.x < 1260 && releaseLocation.x > 220) && (releaseLocation.y < 720 && releaseLocation.y > 110)  && releasedOperationInside){
 				releasedOperaion = false;
 		    	System.out.println("Adding Component to Grid");
-		    	addComp = new AddComponent(innerPanel.getComponentReceiver(), source, newComponent, releaseLocation);
-		    	innerPanel.getComponentManager().doCurrentCommand(addComp);
+		    	addComp = new AddComponent(selectedTab.getComponentReceiver(), source, newComponent, releaseLocation);
+		    	selectedTab.getComponentManager().doCurrentCommand(addComp);
 			}
 			
 			else {
@@ -292,16 +292,16 @@ public class ComponentMover extends MouseAdapter
 				releasedOperaion = false;
 				releasedOperationInside = false;
 		    	System.out.println("Component inside of the grid");	
-		    	moveComp = new MoveComponent(innerPanel.getComponentReceiver(), source, releaseLocation);
-		    	innerPanel.getComponentManager().doCurrentCommand(moveComp);
+		    	moveComp = new MoveComponent(selectedTab.getComponentReceiver(), source, releaseLocation);
+		    	selectedTab.getComponentManager().doCurrentCommand(moveComp);
 			}
 			
 	    	if((releaseLocation.x > 1260 | releaseLocation.x < 220) | (releaseLocation.y > 720 | releaseLocation.y < 110) && releasedOperationInside){
 	    		releasedOperationInside = false;
 	    		releasedOperaion = false;
 		    	System.out.println("Component outside of the grid");
-		    	deleteComp = new DeleteComponent(innerPanel.getComponentReceiver(), source, releaseLocation);
-		    	innerPanel.getComponentManager().doCurrentCommand(deleteComp);
+		    	deleteComp = new DeleteComponent(selectedTab.getComponentReceiver(), source, releaseLocation);
+		    	selectedTab.getComponentManager().doCurrentCommand(deleteComp);
 	    	}
 		}
 		
