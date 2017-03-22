@@ -31,7 +31,7 @@ public class DoorComponent extends FloorComponent{
 	
 	@Override
 	public void createComponent(){
-		ImageIcon image = new ImageIcon("quality.png");
+		ImageIcon image = new ImageIcon("doorFacingDownOpenRight.png");
 		setIcon(image);
 	}
 	

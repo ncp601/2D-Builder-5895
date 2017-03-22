@@ -337,24 +337,11 @@ public class MenuPane extends JPanel{
             }
         });
 
-        
-        fillLabel = new WallComponent();
-        wallsMenuPanel.add(fillLabel);
-        
-        fillLabel = new DoorComponent();
-        wallsMenuPanel.add(fillLabel);
-
-        fillLabel = new WindowComponent();
-        wallsMenuPanel.add(fillLabel);
-
-        fillLabel = new WallComponent();
-        wallsMenuPanel.add(fillLabel);
-
-        fillLabel = new WallComponent();
-        wallsMenuPanel.add(fillLabel);
-
-        fillLabel = new WallComponent();
-        wallsMenuPanel.add(fillLabel);
+        wallsMenuPanel.add(new WallComponent());
+        wallsMenuPanel.add(new WallComponent());
+        wallsMenuPanel.add(new WallComponent());
+        wallsMenuPanel.add(new WallComponent());
+        wallsMenuPanel.add(new WallComponent());
         
         add(wallsMenuPanel, "WALLS");
         
@@ -383,7 +370,7 @@ public class MenuPane extends JPanel{
                 backButtonActionPerformed(evt);
             }
         });
-
+        
         add(elevatorMenuPanel, "ELEVATORS");
 
       //Creates the doorsMenuPanel that will hold door components
@@ -397,6 +384,15 @@ public class MenuPane extends JPanel{
             }
         });
 
+        doorsMenuPanel.add(new DoorComponent());
+        doorsMenuPanel.add(new DoorComponent());
+        doorsMenuPanel.add(new DoorComponent());
+        doorsMenuPanel.add(new DoorComponent());
+        doorsMenuPanel.add(new DoorComponent());
+        doorsMenuPanel.add(new DoorComponent());
+        doorsMenuPanel.add(new DoorComponent());
+        doorsMenuPanel.add(new DoorComponent());
+        
         add(doorsMenuPanel, "DOORS");
 
       //Creates the flooringMenuPanel that will hold flooring components
@@ -423,6 +419,11 @@ public class MenuPane extends JPanel{
             }
         });
         
+        windowsMenuPanel.add(new WindowComponent());
+        windowsMenuPanel.add(new WindowComponent());
+        windowsMenuPanel.add(new WindowComponent());
+        windowsMenuPanel.add(new WindowComponent());
+        
         add(windowsMenuPanel, "WINDOWS");
 
       //Creates the livingRoomMenuPanel that will hold living room components
@@ -435,7 +436,7 @@ public class MenuPane extends JPanel{
                 backButtonActionPerformed(evt);
             }
         });
-        
+
         add(livingRoomMenuPanel, "LIVINGROOM");
 
       //Creates the dinningRoomMenuPanel that will hold dinning room components

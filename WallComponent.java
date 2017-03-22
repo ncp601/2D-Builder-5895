@@ -32,7 +32,7 @@ public class WallComponent extends FloorComponent{
 	
 	@Override
 	public void createComponent(){
-		ImageIcon image = new ImageIcon("quality.png");
+		ImageIcon image = new ImageIcon("threeBlockWall.png");
 		setIcon(image);
 	}
 	

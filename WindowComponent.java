@@ -31,7 +31,7 @@ public class WindowComponent extends FloorComponent{
 	
 	@Override
 	public void createComponent(){
-		ImageIcon image = new ImageIcon("quality.png");
+		ImageIcon image = new ImageIcon("threeBlockWindowHorizontal.png");
 		setIcon(image);
 	}
 	
