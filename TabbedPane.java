@@ -14,15 +14,17 @@ import javax.swing.plaf.basic.BasicButtonUI;
  * Class that creates everything in the left tabbed panel. 
  * 
  */
-public class TabbedPane {
+public class TabbedPane implements ChangeListener{
 
 	// Variables declaration                  
     private JButton addTabButton;
     private JTabbedPane floorTabPanel;
-	
+	private MainLayeredPane selectedPane;
+    
+    private InnerPanel innerPanel;
+    
 	private int tabNumber = 0;
-	
-	private InnerPanel innerPanel;
+	private int index = 0;
 	
 	public TabbedPane() {
 		
@@ -33,23 +35,9 @@ public class TabbedPane {
     
   //------------------------------------------------------------------------------
     
-    floorTabPanel.addChangeListener(new ChangeListener(){
-    	
-        public void stateChanged(ChangeEvent e) {
-            if (e.getSource() instanceof JTabbedPane) {
-            	innerPanel = InnerPanel.getInstance();
-                JTabbedPane pane = (JTabbedPane) e.getSource();
-                innerPanel.setSelectedFloor((MainLayeredPane)pane.getComponentAt(pane.getSelectedIndex()));
-                
-            }
-        }
-    });
-    
-  //------------------------------------------------------------------------------
-	
     //Adds the initial floor to the tab panel 
-    floorTabPanel.addTab("Floor 1", new MainLayeredPane(tabNumber) );
-
+    floorTabPanel.addTab("Floor 1", new MainLayeredPane(tabNumber));
+    
   //------------------------------------------------------------------------------
 
     //Creates the button that will add new tabs to the TabbedPane
@@ -65,8 +53,9 @@ public class TabbedPane {
         	insertTab();
         }
     });
-
+    
     insertTab();
+    
 	}
 	
 	//Gets the current floorTabPanel
@@ -76,24 +65,21 @@ public class TabbedPane {
 	
 	
 	private void insertTab(){
-		//innerPanel = InnerPanel.getInstance();
 		tabNumber++;
 		String title = "Floor " + String.valueOf (floorTabPanel.getTabCount());
+		System.out.println(floorTabPanel.getTabCount());
 	    System.out.println(title);
 	    if (tabNumber >= 0 && tabNumber < 17) {
 	        JPanel pnl = new JPanel();
 	        pnl.setOpaque(false);
-			floorTabPanel.insertTab(title, null, new MainLayeredPane(tabNumber), "", floorTabPanel.getTabCount() - 1 );
+			floorTabPanel.insertTab(title, null, new MainLayeredPane(tabNumber), "", floorTabPanel.getTabCount() - 1);
 	        pnl.add(addTabButton);
 	        floorTabPanel.setTabComponentAt(floorTabPanel.getTabCount() - 1, pnl);
 	        floorTabPanel.setSelectedIndex(floorTabPanel.getTabCount() - 2);
-	        floorTabPanel.setEnabledAt(floorTabPanel.getTabCount()-1, false);	    	
-	    }
-	    
-	    else {
-	    	return;
-	    }
-	   
+	        floorTabPanel.setEnabledAt(floorTabPanel.getTabCount()-1, false);	
+	        floorTabPanel.addChangeListener(this);
+	        
+	    } 
     }
 	
 	//Removes all the current tabs and adds the default 
@@ -105,6 +91,16 @@ public class TabbedPane {
 		insertTab();
 	}
 	
+	public void stateChanged(ChangeEvent event) {
+    	
+        if (event.getSource() instanceof JTabbedPane) {
+        	innerPanel = InnerPanel.getInstance();
+            JTabbedPane pane = (JTabbedPane)event.getSource();
+            index = pane.getSelectedIndex();
+            selectedPane = (MainLayeredPane)pane.getComponentAt(index);
+            innerPanel.setSelectedFloor(selectedPane);             
+        }
 
-
+    }
+	
 }

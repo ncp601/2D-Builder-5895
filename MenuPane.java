@@ -582,37 +582,7 @@ public class MenuPane extends JPanel{
 					innerPanel.setInMenuPane(false);
 				}	
 			}               
-	    });
-        
-//        addMouseListener(new MouseAdapter(){
-//            @Override
-//          public void mousePressed(MouseEvent evt){
-//          	try{
-//          		currentComponent = (FloorComponent)evt.getSource();
-//          		type = currentComponent.getComponentType();
-//        	    newComponent = factory.getComponent(type);
-//        	    componentSet = true;
-//          	}
-//          	catch(Exception notC){}
-//          }
-//            	
-//          //-------------------------------------------------------------------------------------------------------------   
-//            
-//            @Override
-//            public void mouseExited(MouseEvent evt){
-//            	try{
-//            		currentComponent = (FloorComponent)evt.getSource();
-//            		type = currentComponent.getComponentType();
-//        	    	newComponent = factory.getComponent(type);
-//        	    	tabbedPane.mainLayeredPanel.addToGlassPane(newComponent);
-//        	    	componentSet = true;
-//            	}
-//            	catch(Exception notC){}
-//            }
-//            
-//            });
-//          //------------------------------------------------------------------------------------------------------------- 
-        
+	    });      
     }
     
   //-------------------------------------------------------------------------------------------------------------     

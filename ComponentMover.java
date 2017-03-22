@@ -276,7 +276,7 @@ public class ComponentMover extends MouseAdapter
 				releasedOperaion = false;
 		    	System.out.println("Adding Component to Grid");
 		    	addComp = new AddComponent(selectedTab.getComponentReceiver(), source, newComponent, releaseLocation);
-		    	innerPanel.getSelectedFloor().getComponentManager().doCurrentCommand(addComp);
+		    	selectedTab.getComponentManager().doCurrentCommand(addComp);
 			}
 			
 			else {

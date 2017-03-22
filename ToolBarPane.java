@@ -26,7 +26,7 @@ public class ToolBarPane {
     private ToolBarCommands newPlan;
     private ToolBarCommands loadPlan;
     private ToolBarCommands savePlan;
-    private ComponentCommands clearPlane;
+    private ComponentCommands clearPlan;
     
     private TabbedPane currentTabbedPane;
     
@@ -191,18 +191,18 @@ public class ToolBarPane {
 	
     private void undoButtonActionPerformed(ActionEvent evt) {                                                    
     	innerPanel = InnerPanel.getInstance();
-    	innerPanel.getComponentManager().undo(); 
+    	innerPanel.getSelectedFloor().getComponentManager().undo(); 
     } 
     
     private void redoButtonActionPerformed(ActionEvent evt) {                                                    
     	innerPanel = InnerPanel.getInstance();
-    	innerPanel.getComponentManager().redo();
+    	innerPanel.getSelectedFloor().getComponentManager().redo();
     } 
     
     private void clearButtonActionPerformed(ActionEvent evt) {                                                    
     	innerPanel = InnerPanel.getInstance();
-    	clearPlane = new ClearComponents();
-    	innerPanel.getComponentManager().doCurrentCommand(clearPlane);
+    	clearPlan = new ClearComponents();
+    	innerPanel.getSelectedFloor().getComponentManager().doCurrentCommand(clearPlan);
     } 
     
 }

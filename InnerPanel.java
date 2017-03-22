@@ -37,6 +37,8 @@ public class InnerPanel {
 	    leftMenuHeaderPanel = new JPanel();
 	    overallHeaderLabel = new JLabel();
 	    
+	    selectedFloor = (MainLayeredPane)tabbedPane.getGUI().getComponentAt(0);
+	    
 //	    compM = new ComponentManager();
 //	    compR = new ComponentReceiver();
 	    

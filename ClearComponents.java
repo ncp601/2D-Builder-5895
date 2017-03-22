@@ -13,7 +13,7 @@ public class ClearComponents implements ComponentCommands {
 	
 	public ClearComponents(){
 		innerPanel = InnerPanel.getInstance();
-		compR = innerPanel.getComponentReceiver();
+		compR = innerPanel.getSelectedFloor().getComponentReceiver();
 	}
 	
 	@Override 
