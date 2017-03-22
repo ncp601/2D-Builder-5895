@@ -6,6 +6,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 /**
@@ -28,7 +30,21 @@ public class TabbedPane {
     floorTabPanel = new JTabbedPane();
     floorTabPanel.setBackground(new Color(155, 155, 155));
     floorTabPanel.setFocusable(false);
-
+    
+  //------------------------------------------------------------------------------
+    
+    floorTabPanel.addChangeListener(new ChangeListener(){
+    	
+        public void stateChanged(ChangeEvent e) {
+            if (e.getSource() instanceof JTabbedPane) {
+            	innerPanel = InnerPanel.getInstance();
+                JTabbedPane pane = (JTabbedPane) e.getSource();
+                innerPanel.setSelectedFloor((MainLayeredPane)pane.getComponentAt(pane.getSelectedIndex()));
+                
+            }
+        }
+    });
+    
   //------------------------------------------------------------------------------
 	
     //Adds the initial floor to the tab panel 
@@ -49,7 +65,7 @@ public class TabbedPane {
         	insertTab();
         }
     });
-    
+
     insertTab();
 	}
 	

@@ -13,6 +13,7 @@ public class InnerPanel {
 	private JLayeredPane innerContentPanel;
 	private TabbedPane tabbedPane;
 	private MenuPane menuPane;
+	private MainLayeredPane selectedFloor;
 	
 	private boolean inMenuPane;
 	private boolean inMainLayeredPane;
@@ -122,6 +123,10 @@ public class InnerPanel {
 		return tabbedPane;
 	}
 	
+	public MainLayeredPane getSelectedFloor(){
+		return selectedFloor;
+	}
+	
 	public JPanel getMenuPane(){
 		return menuPane;
 	}
@@ -151,6 +156,10 @@ public class InnerPanel {
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	
+	public void setSelectedFloor(MainLayeredPane m){
+		selectedFloor = m;
+	}
 	
 	public void setInMenuPane(Boolean m){
 		inMenuPane = m;
