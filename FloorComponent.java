@@ -27,4 +27,6 @@ abstract public class FloorComponent extends JLabel{
 		return isNewComponent;
 	}
 	
+	
+	
 }

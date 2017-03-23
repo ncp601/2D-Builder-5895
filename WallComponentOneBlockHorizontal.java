@@ -24,10 +24,10 @@ public class WallComponentOneBlockHorizontal extends FloorComponent{
         addMouseListener(compMove);
         addMouseMotionListener(compMove);
         setPreferredSize(size);
-		createComponent();
-		setVisible(true);
 		setMaximumSize(size);
 		setMinimumSize(size);
+		setVisible(true);
+		createComponent();
 	}
 	
 	@Override

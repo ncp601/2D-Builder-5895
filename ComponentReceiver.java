@@ -19,9 +19,9 @@ public class ComponentReceiver {
 		currentComponent.setIsNewComponent(true);
 		innerPanel.getMenuPane().revalidate();
 		innerPanel.getGUI().remove(currentComponent);
-		currentComponent.setSize(componentSize);
+		currentComponent.setSize(currentComponent.getImageSize());
     	selectedTab.getGlassPanel().add(currentComponent);
-    	currentComponent.setLocation(sourceComponent.getX() - 210, sourceComponent.getY());
+    	currentComponent.setLocation(sourceComponent.getX() - 210, sourceComponent.getY()); //210
     	currentComponent.setVisible(true);
     	selectedTab.revalidate();
     	selectedTab.repaint();
