@@ -17,7 +17,6 @@ public class InnerPanel {
 	
 	private boolean inMenuPane;
 	private boolean inMainLayeredPane;
-	private boolean inToolBarPane;
 	private boolean createComponent;
 	
 	private Dimension size = new Dimension(1260, 680);
@@ -38,9 +37,6 @@ public class InnerPanel {
 	    overallHeaderLabel = new JLabel();
 	    
 	    selectedFloor = (MainLayeredPane)tabbedPane.getGUI().getComponentAt(0);
-	    
-//	    compM = new ComponentManager();
-//	    compR = new ComponentReceiver();
 	    
 	    innerContentPanel.addMouseListener(compMove);
 	    innerContentPanel.addMouseMotionListener(compMove);
@@ -140,10 +136,6 @@ public class InnerPanel {
 	public boolean getInMainLayeredPane(){
 		return inMainLayeredPane;
 	}
-
-	public boolean getInToolBarPane(){
-		return inToolBarPane;
-	}
 	
 	public boolean getCreateComponent(){
 		return createComponent;
@@ -169,10 +161,6 @@ public class InnerPanel {
 	
 	public void setInMainLayeredPane(Boolean m){
 		inMainLayeredPane = m;
-	}
-
-	public void setInToolBarPane(Boolean m){
-		inToolBarPane = m;
 	}
 	
 	public void setCreateComponent(Boolean m){

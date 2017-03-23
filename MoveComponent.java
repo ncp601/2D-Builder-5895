@@ -23,7 +23,7 @@ public class MoveComponent implements ComponentCommands {
 	
 	@Override 
 	public void undo(){
-		  
+		compR.moveComponent(currentLabel, currentLocation);
 	}
 	
 	@Override 

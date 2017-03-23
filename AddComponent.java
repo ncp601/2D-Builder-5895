@@ -30,7 +30,7 @@ public class AddComponent implements ComponentCommands {
 	
 	@Override 
 	public void redo(){
-		compR.addComponent(currentLabel, source,  currentLocation);
+		compR.reAddComponent(currentLabel, source,  currentLocation);
 	}
 	
 }

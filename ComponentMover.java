@@ -17,6 +17,7 @@ public class ComponentMover extends MouseAdapter
 	private Point pressed;
 	private Point location;
 	private Point releaseLocation;
+	private Point previousLocation;
 
 	private Cursor originalCursor;
 	private boolean autoscrolls;
@@ -236,6 +237,7 @@ public class ComponentMover extends MouseAdapter
 
 		innerPanel.getGUI().repaint();
 		destination.setLocation(locationX, locationY);
+		previousLocation = destination.getLocation();
 	}
 
 	/*
@@ -288,15 +290,15 @@ public class ComponentMover extends MouseAdapter
 		}
 		
 		if(!(innerPanel.getInMenuPane()) && currentComponent.getIsNewComponent() && releasedOperaion && selectedTab != null){
-			if((releaseLocation.x < 1260 && releaseLocation.x > 220) && (releaseLocation.y < 720 && releaseLocation.y > 110)  && releasedOperationInside){
+			if((releaseLocation.x < 1260 && releaseLocation.x > 160) && (releaseLocation.y < 720 && releaseLocation.y > 60)  && releasedOperationInside){
 				releasedOperaion = false;
 				releasedOperationInside = false;
 		    	System.out.println("Component inside of the grid");	
-		    	moveComp = new MoveComponent(selectedTab.getComponentReceiver(), source, releaseLocation);
+		    	moveComp = new MoveComponent(selectedTab.getComponentReceiver(), source, previousLocation);
 		    	selectedTab.getComponentManager().doCurrentCommand(moveComp);
 			}
 			
-	    	if((releaseLocation.x > 1260 | releaseLocation.x < 220) | (releaseLocation.y > 720 | releaseLocation.y < 110) && releasedOperationInside && selectedTab != null){
+	    	if((releaseLocation.x > 1260 | releaseLocation.x < 160) | (releaseLocation.y > 720 | releaseLocation.y < 60) && releasedOperationInside && selectedTab != null){
 	    		releasedOperationInside = false;
 	    		releasedOperaion = false;
 		    	System.out.println("Component outside of the grid");
