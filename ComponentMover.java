@@ -84,7 +84,7 @@ public class ComponentMover extends MouseAdapter
 		currentComponent = (FloorComponent)e.getSource();
 		pressedOperation = true;
 		
-			if(!(innerPanel.getInMainLayeredPane()) && !(currentComponent.getIsNewComponent()) && pressedOperation){
+			if(!(innerPanel.getInMainLayeredPane()) && !(currentComponent.getIsOnGrid()) && pressedOperation){
 				pressedOperation = false;
 				innerPanel.setCreateComponent(false);
 				currentComponent = (FloorComponent)e.getSource();
@@ -152,7 +152,7 @@ public class ComponentMover extends MouseAdapter
 		    	System.out.println("Add Operation");
 			}
 				
-			if(!(innerPanel.getInMenuPane()) && currentComponent.getIsNewComponent() && pressedOperation){
+			if(currentComponent.getIsOnGrid() && pressedOperation){
 				pressedOperation = false;
 				int width  = source.getSize().width  - dragInsets.left - dragInsets.right;
 				int height = source.getSize().height - dragInsets.top - dragInsets.bottom;
@@ -161,6 +161,7 @@ public class ComponentMover extends MouseAdapter
 				if (r.contains(e.getPoint()))
 					setupForDragging(e);
 				
+				newComponent.setPreviousLocation(currentComponent.getLocation());
 				innerPanel.getMenuPane().repaint();
 		    	innerPanel.getGUI().revalidate();
 		    	System.out.println("Moving Operation");
@@ -237,7 +238,6 @@ public class ComponentMover extends MouseAdapter
 
 		innerPanel.getGUI().repaint();
 		destination.setLocation(locationX, locationY);
-		previousLocation = destination.getLocation();
 	}
 
 	/*
@@ -273,7 +273,7 @@ public class ComponentMover extends MouseAdapter
 		
 		innerContentPanel = innerPanel.getGUI();
 		
-		if(!(innerPanel.getInMainLayeredPane()) && !(currentComponent.getIsNewComponent()) && releasedOperaion && selectedTab != null){
+		if(!(innerPanel.getInMainLayeredPane()) && !(currentComponent.getIsOnGrid()) && releasedOperaion && selectedTab != null){
 			if((releaseLocation.x < 1260 && releaseLocation.x > 220) && (releaseLocation.y < 720 && releaseLocation.y > 110)  && releasedOperationInside){
 				releasedOperaion = false;
 		    	System.out.println("Adding Component to Grid");
@@ -289,12 +289,12 @@ public class ComponentMover extends MouseAdapter
 			}
 		}
 		
-		if(!(innerPanel.getInMenuPane()) && currentComponent.getIsNewComponent() && releasedOperaion && selectedTab != null){
+		if(!(innerPanel.getInMenuPane()) && currentComponent.getIsOnGrid() && releasedOperaion && selectedTab != null){
 			if((releaseLocation.x < 1260 && releaseLocation.x > 160) && (releaseLocation.y < 720 && releaseLocation.y > 60)  && releasedOperationInside){
 				releasedOperaion = false;
 				releasedOperationInside = false;
 		    	System.out.println("Component inside of the grid");	
-		    	moveComp = new MoveComponent(selectedTab.getComponentReceiver(), source, previousLocation);
+		    	moveComp = new MoveComponent(selectedTab.getComponentReceiver(), source, source.getLocation());
 		    	selectedTab.getComponentManager().doCurrentCommand(moveComp);
 			}
 			

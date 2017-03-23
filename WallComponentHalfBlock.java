@@ -12,10 +12,10 @@ public class WallComponentHalfBlock extends FloorComponent{
 	private static final long serialVersionUID = 1L;
 	
 	final private String componentType = "WALLHALF";
-	private int xPosition;
-	private int yPosition;
+//	private Point previousLocation;
+//	private Point currentLocation;
 	private boolean isStackable = false;
-	private boolean isNewComponent;
+//	private boolean isOnGrid;
 	private Dimension size = new Dimension(110, 110);
 	
 	private ComponentMover compMove = new ComponentMover();
@@ -36,13 +36,12 @@ public class WallComponentHalfBlock extends FloorComponent{
 		setIcon(image);
 	}
 	
-	@Override
 	public String getComponentType(){
 		return componentType;
 	}
 	
-	@Override
 	public Dimension getImageSize(){
 		return size;
 	}
+	
 }

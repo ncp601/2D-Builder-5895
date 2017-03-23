@@ -34,12 +34,12 @@ public class DoorComponentFacingLeftOpenLeft extends FloorComponent{
 		ImageIcon image = new ImageIcon("doorFacingLeftOpenLeft.png");
 		setIcon(image);
 	}
-	
+
 	@Override
 	public String getComponentType(){
 		return componentType;
 	}
-	
+
 	@Override
 	public Dimension getImageSize(){
 		return size;

@@ -16,12 +16,13 @@ public class ComponentReceiver {
 		innerPanel = InnerPanel.getInstance();
 		selectedTab = innerPanel.getSelectedFloor();
 		
-		currentComponent.setIsNewComponent(true);
+		currentComponent.setIsOnGrid(true);
 		innerPanel.getMenuPane().revalidate();
 		innerPanel.getGUI().remove(currentComponent);
 		currentComponent.setSize(currentComponent.getImageSize());
     	selectedTab.getGlassPanel().add(currentComponent);
-    	currentComponent.setLocation(sourceComponent.getX() - 210, sourceComponent.getY()); //210
+    	currentComponent.setLocation(sourceComponent.getX() - 213, sourceComponent.getY() + 5); 
+    	currentComponent.setPreviousLocation(currentComponent.getLocation());
     	currentComponent.setVisible(true);
     	selectedTab.revalidate();
     	selectedTab.repaint();
@@ -31,12 +32,13 @@ public class ComponentReceiver {
 		innerPanel = InnerPanel.getInstance();
 		selectedTab = innerPanel.getSelectedFloor();
 		
-		currentComponent.setIsNewComponent(true);
+		currentComponent.setIsOnGrid(true);
 		innerPanel.getMenuPane().revalidate();
 		innerPanel.getGUI().remove(currentComponent);
 		currentComponent.setSize(currentComponent.getImageSize());
     	selectedTab.getGlassPanel().add(currentComponent);
-    	currentComponent.setLocation(currentComponent.getX(), currentComponent.getY()); //210
+    	currentComponent.setLocation(currentComponent.getX(), currentComponent.getY());
+    	((FloorComponent) currentComponent).setCurrentLocation(currentLocation);
     	currentComponent.setVisible(true);
     	selectedTab.revalidate();
     	selectedTab.repaint();
@@ -47,18 +49,8 @@ public class ComponentReceiver {
 		selectedTab = innerPanel.getSelectedFloor();
 		selectedTab.getGlassPanel().remove(currentComponent);
 		selectedTab.getGlassPanel().add(currentComponent);
-		currentComponent.setLocation(currentLocation.x - 256, currentLocation.y -116);
-    	selectedTab.revalidate();
-    	selectedTab.repaint();
-		
-	}
-	
-	public void moveBackComponent(Component currentComponent, Point currentLocation){
-		innerPanel = InnerPanel.getInstance();
-		selectedTab = innerPanel.getSelectedFloor();
-		selectedTab.getGlassPanel().remove(currentComponent);
-		selectedTab.getGlassPanel().add(currentComponent);
-		currentComponent.setLocation(currentLocation.x - 256, currentLocation.y -116);
+		currentComponent.setLocation(currentLocation);
+		((FloorComponent) currentComponent).setCurrentLocation(currentLocation);
     	selectedTab.revalidate();
     	selectedTab.repaint();
 		
