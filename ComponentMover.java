@@ -161,7 +161,7 @@ public class ComponentMover extends MouseAdapter
 				if (r.contains(e.getPoint()))
 					setupForDragging(e);
 				
-				newComponent.setPreviousLocation(currentComponent.getLocation());
+				currentComponent.setPreviousLocation(currentComponent.getLocation());
 				innerPanel.getMenuPane().repaint();
 		    	innerPanel.getGUI().revalidate();
 		    	System.out.println("Moving Operation");

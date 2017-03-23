@@ -175,11 +175,17 @@ public class ToolBarPane {
 	}
 	
     private void saveFloorPlanButtonActionPerformed(ActionEvent evt) {                                                    
-        // TODO 
+    	innerPanel = InnerPanel.getInstance();
+    	currentTabbedPane = innerPanel.getTabbedPane();
+    	savePlan = new SaveCommand(tbR ,currentTabbedPane);
+    	tbM.doCurrentCommand(savePlan);
     }                                                   
 
     private void loadFloorPlanButtonActionPerformed(ActionEvent evt) {                                                    
-        // TODO 
+    	innerPanel = InnerPanel.getInstance();
+    	currentTabbedPane = innerPanel.getTabbedPane();
+    	loadPlan = new LoadCommand(tbR ,currentTabbedPane);
+    	tbM.doCurrentCommand(loadPlan);
     }
     
     private void newFloorPlanButtonActionPerformed(ActionEvent evt) {    
