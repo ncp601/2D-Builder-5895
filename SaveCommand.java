@@ -1,5 +1,7 @@
 package Frame;
 
+import java.io.IOException;
+
 public class SaveCommand implements ToolBarCommands{
 
 	ToolBarReceiver toolbarR;

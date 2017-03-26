@@ -125,6 +125,31 @@ public class TabbedPane implements ChangeListener{
 		previousTab.revalidate();
 	}
 	
+	public String floorsToString(){
+		
+		String allComponents = "";
+		
+		innerPanel = InnerPanel.getInstance();
+		
+		for(int i = 0; i < tabNumber - 1; i++){
+			MainLayeredPane currentFloor = (MainLayeredPane)floorTabPanel.getComponentAt(tabNumber);
+			Component[] componentGrid = currentFloor.getGlassPanel().getComponents();
+			for(int j = 0; j < onGrid.length; j++){
+				String temp = componentGrid[i].toString();
+				if(i == 0){
+					allComponents = "$ " + temp + " || ";
+				}
+				else {
+					allComponents = allComponents + temp + " || ";
+				}
+			}
+			
+		}
+		allComponents = allComponents + " $";
+		
+		return allComponents;
+	}
+	
 	public void stateChanged(ChangeEvent event) {
     	
         if (event.getSource() instanceof JTabbedPane) {
