@@ -13,10 +13,10 @@ public class InnerPanel {
 	private JLayeredPane innerContentPanel;
 	private TabbedPane tabbedPane;
 	private MenuPane menuPane;
+	private MainLayeredPane selectedFloor;
 	
 	private boolean inMenuPane;
 	private boolean inMainLayeredPane;
-	private boolean inToolBarPane;
 	private boolean createComponent;
 	
 	private Dimension size = new Dimension(1260, 680);
@@ -36,8 +36,7 @@ public class InnerPanel {
 	    leftMenuHeaderPanel = new JPanel();
 	    overallHeaderLabel = new JLabel();
 	    
-	    compM = new ComponentManager();
-	    compR = new ComponentReceiver();
+	    selectedFloor = (MainLayeredPane)tabbedPane.getGUI().getComponentAt(0);
 	    
 	    innerContentPanel.addMouseListener(compMove);
 	    innerContentPanel.addMouseMotionListener(compMove);
@@ -122,6 +121,10 @@ public class InnerPanel {
 		return tabbedPane;
 	}
 	
+	public MainLayeredPane getSelectedFloor(){
+		return selectedFloor;
+	}
+	
 	public JPanel getMenuPane(){
 		return menuPane;
 	}
@@ -132,10 +135,6 @@ public class InnerPanel {
 	
 	public boolean getInMainLayeredPane(){
 		return inMainLayeredPane;
-	}
-
-	public boolean getInToolBarPane(){
-		return inToolBarPane;
 	}
 	
 	public boolean getCreateComponent(){
@@ -152,6 +151,10 @@ public class InnerPanel {
 	
 	//------------------------------------------------------------------------------------------------
 	
+	public void setSelectedFloor(MainLayeredPane m){
+		selectedFloor = m;
+	}
+	
 	public void setInMenuPane(Boolean m){
 		inMenuPane = m;
 	}
@@ -159,13 +162,17 @@ public class InnerPanel {
 	public void setInMainLayeredPane(Boolean m){
 		inMainLayeredPane = m;
 	}
-
-	public void setInToolBarPane(Boolean m){
-		inToolBarPane = m;
-	}
 	
 	public void setCreateComponent(Boolean m){
 		createComponent = m;
+	}
+	
+	public void setComponentManager(ComponentManager cM){
+		compM = cM;
+	}
+	
+	public void setComponentReceiver(ComponentReceiver cR){
+		compR = cR;
 	}
 	
 	//------------------------------------------------------------------------------------------------

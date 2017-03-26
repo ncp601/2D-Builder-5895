@@ -3,14 +3,16 @@ package Frame;
 public class LoadCommand implements ToolBarCommands{
 
 	ToolBarReceiver toolbarR;
+	TabbedPane currentTabbedPane;
 	
-	public LoadCommand(){
-		
+	public LoadCommand(ToolBarReceiver r ,TabbedPane p){
+		this.toolbarR = r;
+		this.currentTabbedPane = p;
 	}
 	
 	@Override
 	public void execute(){
-		toolbarR.loadPlan();
+		toolbarR.loadPlan(currentTabbedPane);
 	}
 	
 }
