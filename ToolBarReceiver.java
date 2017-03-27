@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.swing.*;
 
@@ -17,6 +18,7 @@ public class ToolBarReceiver {
 	private BufferedWriter saveStream;
 	private File currentFile;
 	private FileWriter fw;
+	private PrintWriter out;
 	private String applicationDirectory = "C:/Users/Nick/workspace/twoBuilder/FloorPlans";
 	
 	private int returnFile;
@@ -28,6 +30,8 @@ public class ToolBarReceiver {
 	}
 	
 	public void savePlan(){
+		innerPanel = InnerPanel.getInstance();
+		
 		fileChooser.setCurrentDirectory(new File(applicationDirectory));
 		fileChooser.setDialogTitle("FloorPlans");
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -39,7 +43,12 @@ public class ToolBarReceiver {
 			try {
 				fw = new FileWriter(currentFile + ".txt");
 				saveStream = new BufferedWriter(fw);
-				fw.write(innerPanel.getTabbedPane().floorsToString());
+				out = new PrintWriter(saveStream);
+				out.println(innerPanel.getTabbedPane().floorsToString());
+				out.close();
+//				saveStream.write(innerPanel.getTabbedPane().floorsToString());
+				
+				System.out.println("Written to the file");
 				fw.close();
 			} 
 			catch (IOException e) {

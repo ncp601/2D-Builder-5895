@@ -20,8 +20,10 @@ public class TabbedPane implements ChangeListener{
     private JTabbedPane floorTabPanel;
 	private MainLayeredPane selectedTab;
 	private MainLayeredPane previousTab;
+	private MainLayeredPane currentFloor;
     
 	private Component[] onGrid;
+	private Component[] componentList;
 	private String wallType;
 	private FloorComponent wallComponent;
 	private AbstractFloorComponentFactory wallFactory = FloorComponentFactoryProducer.getFactory("WALL");
@@ -128,15 +130,17 @@ public class TabbedPane implements ChangeListener{
 	public String floorsToString(){
 		
 		String allComponents = "";
+		int tabs = floorTabPanel.getTabCount() - 1;
 		
 		innerPanel = InnerPanel.getInstance();
 		
-		for(int i = 0; i < tabNumber - 1; i++){
-			MainLayeredPane currentFloor = (MainLayeredPane)floorTabPanel.getComponentAt(tabNumber);
-			Component[] componentGrid = currentFloor.getGlassPanel().getComponents();
-			for(int j = 0; j < onGrid.length; j++){
-				String temp = componentGrid[i].toString();
-				if(i == 0){
+		
+		for(int i = 0; i < tabs; i++){
+			currentFloor = (MainLayeredPane) floorTabPanel.getComponentAt(tabs -1);
+			componentList = currentFloor.getGlassPanel().getComponents();
+			for(int j = 0; j < componentList.length; j++){
+				String temp = componentList[j].toString();
+				if(i == 0 && j == 0){
 					allComponents = "$ " + temp + " || ";
 				}
 				else {
@@ -146,7 +150,7 @@ public class TabbedPane implements ChangeListener{
 			allComponents = allComponents + " %%%% ";
 		}
 		allComponents = allComponents + " $";
-		
+		System.out.println(allComponents);
 		return allComponents;
 	}
 	
