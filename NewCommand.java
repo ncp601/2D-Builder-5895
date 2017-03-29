@@ -5,15 +5,15 @@ import javax.swing.*;
 public class NewCommand implements ToolBarCommands{
 
 	ToolBarReceiver toolbarR;
-	TabbedPane currentMainPane;
+	TabbedPane currentTabbedPane;
 	
 	public NewCommand(ToolBarReceiver r ,TabbedPane p) {
 		this.toolbarR = r;
-		this.currentMainPane = p;
+		this.currentTabbedPane = p;
 	}
 	
 	@Override
 	public void execute(){
-		toolbarR.newPlan(currentMainPane);
+		toolbarR.newPlan(currentTabbedPane);
 	}
 }

@@ -26,15 +26,11 @@ public class ToolBarPane {
     private ToolBarCommands newPlan;
     private ToolBarCommands loadPlan;
     private ToolBarCommands savePlan;
-    private ComponentCommands clearPlane;
+    private ComponentCommands clearPlan;
     
     private TabbedPane currentTabbedPane;
     
     private InnerPanel innerPanel;
-    
-    //tbM.doCurrentCommand(tbR, newPlan);
-    //tbM.doCurrentCommand(tbR, loadPlan);
-    //tbM.doCurrentCommand(tbR, savePlan);
     
 	public ToolBarPane(){
 		
@@ -179,11 +175,17 @@ public class ToolBarPane {
 	}
 	
     private void saveFloorPlanButtonActionPerformed(ActionEvent evt) {                                                    
-        // TODO 
+    	innerPanel = InnerPanel.getInstance();
+    	currentTabbedPane = innerPanel.getTabbedPane();
+    	savePlan = new SaveCommand(tbR ,currentTabbedPane);
+    	tbM.doCurrentCommand(savePlan);
     }                                                   
 
     private void loadFloorPlanButtonActionPerformed(ActionEvent evt) {                                                    
-        // TODO 
+    	innerPanel = InnerPanel.getInstance();
+    	currentTabbedPane = innerPanel.getTabbedPane();
+    	loadPlan = new LoadCommand(tbR ,currentTabbedPane);
+    	tbM.doCurrentCommand(loadPlan);
     }
     
     private void newFloorPlanButtonActionPerformed(ActionEvent evt) {    
@@ -195,18 +197,18 @@ public class ToolBarPane {
 	
     private void undoButtonActionPerformed(ActionEvent evt) {                                                    
     	innerPanel = InnerPanel.getInstance();
-    	innerPanel.getComponentManager().undo(); 
+    	innerPanel.getSelectedFloor().getComponentManager().undo(); 
     } 
     
     private void redoButtonActionPerformed(ActionEvent evt) {                                                    
     	innerPanel = InnerPanel.getInstance();
-    	innerPanel.getComponentManager().redo();
+    	innerPanel.getSelectedFloor().getComponentManager().redo();
     } 
     
     private void clearButtonActionPerformed(ActionEvent evt) {                                                    
     	innerPanel = InnerPanel.getInstance();
-    	clearPlane = new ClearComponents();
-    	innerPanel.getComponentManager().doCurrentCommand(clearPlane);
+    	clearPlan = new ClearComponents();
+    	innerPanel.getSelectedFloor().getComponentManager().doCurrentCommand(clearPlan);
     } 
     
 }

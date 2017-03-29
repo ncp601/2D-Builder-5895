@@ -8,7 +8,6 @@ public class ComponentMover extends MouseAdapter
 {
 	private Insets dragInsets = new Insets(0, 0, 0, 0);
 	private Dimension snapSize = new Dimension(1, 1);
-//	private Insets edgeInsets = new Insets(0, 0, 0, 0);
 	private boolean changeCursor = true;
 	private boolean autoLayout = false;
 
@@ -18,13 +17,26 @@ public class ComponentMover extends MouseAdapter
 	private Point pressed;
 	private Point location;
 	private Point releaseLocation;
+	private Point previousLocation;
 
 	private Cursor originalCursor;
 	private boolean autoscrolls;
 	private boolean potentialDrag;
 
+	private AbstractFloorComponentFactory wallFactory = FloorComponentFactoryProducer.getFactory("WALL");
+    private AbstractFloorComponentFactory windowFactory = FloorComponentFactoryProducer.getFactory("WINDOW");
+    private AbstractFloorComponentFactory doorFactory = FloorComponentFactoryProducer.getFactory("DOOR");
+    private AbstractFloorComponentFactory stairsFactory = FloorComponentFactoryProducer.getFactory("STAIRS");
+    private AbstractFloorComponentFactory elevatorFactory = FloorComponentFactoryProducer.getFactory("ELEVATOR");
+    private AbstractFloorComponentFactory flooringFactory = FloorComponentFactoryProducer.getFactory("FLOORING");
+    private AbstractFloorComponentFactory dinningRoomFactory = FloorComponentFactoryProducer.getFactory("DINNINGROOM");
+    private AbstractFloorComponentFactory bedroomFactory = FloorComponentFactoryProducer.getFactory("BEDROOM");
+    private AbstractFloorComponentFactory bathroomFactory = FloorComponentFactoryProducer.getFactory("BATHROOM");
+    private AbstractFloorComponentFactory laundryFactory = FloorComponentFactoryProducer.getFactory("LAUNDRY");
+    private AbstractFloorComponentFactory garageFactory = FloorComponentFactoryProducer.getFactory("GARAGE");
+    
 	private JLayeredPane innerContentPanel;
-    private FloorComponentFactory factory = new FloorComponentFactory();
+	private MainLayeredPane selectedTab;
     private String type = "";
     private FloorComponent newComponent;
     private FloorComponent currentComponent;
@@ -72,13 +84,56 @@ public class ComponentMover extends MouseAdapter
 		currentComponent = (FloorComponent)e.getSource();
 		pressedOperation = true;
 		
-			if(!(innerPanel.getInMainLayeredPane()) && !(currentComponent.getIsNewComponent()) && pressedOperation){
+			if(!(innerPanel.getInMainLayeredPane()) && !(currentComponent.getIsOnGrid()) && pressedOperation){
 				pressedOperation = false;
 				innerPanel.setCreateComponent(false);
 				currentComponent = (FloorComponent)e.getSource();
 	    		type = currentComponent.getComponentType();
 	    		System.out.println(type);
-		    	newComponent = factory.getComponent(type);
+	    		
+		    	if(wallFactory.getComponent(type) != null){
+		    		newComponent = wallFactory.getComponent(type);
+		    	}
+		    	
+		    	if(windowFactory.getComponent(type) != null){
+		    		newComponent = windowFactory.getComponent(type);
+		    	}
+		    	
+		    	if(doorFactory.getComponent(type) != null){
+		    		newComponent = doorFactory.getComponent(type);
+		    	}
+		    	
+		    	if(stairsFactory.getComponent(type) != null){
+		    		newComponent = stairsFactory.getComponent(type);
+		    	}
+		    	
+		    	if(elevatorFactory.getComponent(type) != null){
+		    		newComponent = elevatorFactory.getComponent(type);
+		    	}
+		    	
+		    	if(flooringFactory.getComponent(type) != null){
+		    		newComponent = flooringFactory.getComponent(type);
+		    	}
+		    	
+		    	if(dinningRoomFactory.getComponent(type) != null){
+		    		newComponent = dinningRoomFactory.getComponent(type);
+		    	}
+		    	
+		    	if(bathroomFactory.getComponent(type) != null){
+		    		newComponent = bathroomFactory.getComponent(type);
+		    	}
+		    	
+		    	if(bedroomFactory.getComponent(type) != null){
+		    		newComponent = bedroomFactory.getComponent(type);
+		    	}
+		    	
+		    	if(laundryFactory.getComponent(type) != null){
+		    		newComponent = laundryFactory.getComponent(type);
+		    	}
+		    	
+		    	if(garageFactory.getComponent(type) != null){
+		    		newComponent = garageFactory.getComponent(type);
+		    	}
 		    	
 		    	newComponent.setVisible(true);
 		    	
@@ -97,7 +152,7 @@ public class ComponentMover extends MouseAdapter
 		    	System.out.println("Add Operation");
 			}
 				
-			if(!(innerPanel.getInMenuPane()) && currentComponent.getIsNewComponent() && pressedOperation){
+			if(currentComponent.getIsOnGrid() && pressedOperation){
 				pressedOperation = false;
 				int width  = source.getSize().width  - dragInsets.left - dragInsets.right;
 				int height = source.getSize().height - dragInsets.top - dragInsets.bottom;
@@ -106,6 +161,7 @@ public class ComponentMover extends MouseAdapter
 				if (r.contains(e.getPoint()))
 					setupForDragging(e);
 				
+				currentComponent.setPreviousLocation(currentComponent.getLocation());
 				innerPanel.getMenuPane().repaint();
 		    	innerPanel.getGUI().revalidate();
 		    	System.out.println("Moving Operation");
@@ -207,8 +263,8 @@ public class ComponentMover extends MouseAdapter
 		innerPanel = InnerPanel.getInstance();
 		releasedOperaion = true;
 		releasedOperationInside = true;
-		Component temp = innerPanel.getTabbedPane().getGUI().getSelectedComponent();
-		MainLayeredPane selectedTab = (MainLayeredPane) temp;
+
+		selectedTab = innerPanel.getSelectedFloor();
 		
 		releaseLocation = e.getLocationOnScreen();
 		System.out.println(releaseLocation);
@@ -217,12 +273,12 @@ public class ComponentMover extends MouseAdapter
 		
 		innerContentPanel = innerPanel.getGUI();
 		
-		if(!(innerPanel.getInMainLayeredPane()) && !(currentComponent.getIsNewComponent()) && releasedOperaion){
+		if(!(innerPanel.getInMainLayeredPane()) && !(currentComponent.getIsOnGrid()) && releasedOperaion && selectedTab != null){
 			if((releaseLocation.x < 1260 && releaseLocation.x > 220) && (releaseLocation.y < 720 && releaseLocation.y > 110)  && releasedOperationInside){
 				releasedOperaion = false;
 		    	System.out.println("Adding Component to Grid");
-		    	addComp = new AddComponent(innerPanel.getComponentReceiver(), source, newComponent, releaseLocation);
-		    	innerPanel.getComponentManager().doCurrentCommand(addComp);
+		    	addComp = new AddComponent(selectedTab.getComponentReceiver(), source, newComponent, releaseLocation);
+		    	selectedTab.getComponentManager().doCurrentCommand(addComp);
 			}
 			
 			else {
@@ -233,21 +289,21 @@ public class ComponentMover extends MouseAdapter
 			}
 		}
 		
-		if(!(innerPanel.getInMenuPane()) && currentComponent.getIsNewComponent() && releasedOperaion){
-			if((releaseLocation.x < 1260 && releaseLocation.x > 220) && (releaseLocation.y < 720 && releaseLocation.y > 110)  && releasedOperationInside){
+		if(!(innerPanel.getInMenuPane()) && currentComponent.getIsOnGrid() && releasedOperaion && selectedTab != null){
+			if((releaseLocation.x < 1260 && releaseLocation.x > 160) && (releaseLocation.y < 720 && releaseLocation.y > 60)  && releasedOperationInside){
 				releasedOperaion = false;
 				releasedOperationInside = false;
 		    	System.out.println("Component inside of the grid");	
-		    	moveComp = new MoveComponent(innerPanel.getComponentReceiver(), source, releaseLocation);
-		    	innerPanel.getComponentManager().doCurrentCommand(moveComp);
+		    	moveComp = new MoveComponent(selectedTab.getComponentReceiver(), source, source.getLocation());
+		    	selectedTab.getComponentManager().doCurrentCommand(moveComp);
 			}
 			
-	    	if((releaseLocation.x > 1260 | releaseLocation.x < 220) | (releaseLocation.y > 720 | releaseLocation.y < 110) && releasedOperationInside){
+	    	if((releaseLocation.x > 1260 | releaseLocation.x < 160) | (releaseLocation.y > 720 | releaseLocation.y < 60) && releasedOperationInside && selectedTab != null){
 	    		releasedOperationInside = false;
 	    		releasedOperaion = false;
 		    	System.out.println("Component outside of the grid");
-		    	deleteComp = new DeleteComponent(innerPanel.getComponentReceiver(), source, releaseLocation);
-		    	innerPanel.getComponentManager().doCurrentCommand(deleteComp);
+		    	deleteComp = new DeleteComponent(selectedTab.getComponentReceiver(), source, releaseLocation);
+		    	selectedTab.getComponentManager().doCurrentCommand(deleteComp);
 	    	}
 		}
 		

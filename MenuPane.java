@@ -48,7 +48,19 @@ public class MenuPane extends JPanel{
     private JPanel windowsMenuPanel; 
     
     private TabbedPane tabbedPane;
-    private FloorComponentFactory factory;
+    
+    private AbstractFloorComponentFactory wallFactory;
+    private AbstractFloorComponentFactory windowFactory;
+    private AbstractFloorComponentFactory doorFactory;
+    private AbstractFloorComponentFactory stairsFactory;
+    private AbstractFloorComponentFactory elevatorFactory;
+    private AbstractFloorComponentFactory flooringFactory;
+    private AbstractFloorComponentFactory dinningRoomFactory;
+    private AbstractFloorComponentFactory bedroomFactory;
+    private AbstractFloorComponentFactory bathroomFactory;
+    private AbstractFloorComponentFactory laundryFactory;
+    private AbstractFloorComponentFactory garageFactory;
+    
     private String type = "";
     private FloorComponent fillLabel;
     private FloorComponent newComponent;
@@ -329,6 +341,23 @@ public class MenuPane extends JPanel{
       //Creates the wallsMenuPanel that will hold wall components 
         wallsMenuPanel.setLayout(g);
                 
+      //------------------------------------------------------------------------------
+        
+      //Assigns the factories for each type of component
+        wallFactory = FloorComponentFactoryProducer.getFactory("WALL");
+        windowFactory = FloorComponentFactoryProducer.getFactory("WINDOW");
+        doorFactory = FloorComponentFactoryProducer.getFactory("DOOR");
+        stairsFactory = FloorComponentFactoryProducer.getFactory("STAIRS");
+        elevatorFactory = FloorComponentFactoryProducer.getFactory("ELEVATOR");
+        flooringFactory = FloorComponentFactoryProducer.getFactory("FLOORING");
+        dinningRoomFactory = FloorComponentFactoryProducer.getFactory("DINNINGROOM");
+        bedroomFactory = FloorComponentFactoryProducer.getFactory("BEDROOM");
+        bathroomFactory = FloorComponentFactoryProducer.getFactory("BATHROOM");
+        laundryFactory = FloorComponentFactoryProducer.getFactory("LAUNDRY");
+        garageFactory = FloorComponentFactoryProducer.getFactory("GARAGE");
+        
+      //------------------------------------------------------------------------------
+        
       //Creates the backButton that will redirect users from the various component tabs back to the main menu
         wallsMenuPanel.add(backButton = new BackButton());
         backButton.addActionListener(new ActionListener() {
@@ -337,24 +366,13 @@ public class MenuPane extends JPanel{
             }
         });
 
-        
-        fillLabel = new WallComponent();
-        wallsMenuPanel.add(fillLabel);
-        
-        fillLabel = new DoorComponent();
-        wallsMenuPanel.add(fillLabel);
-
-        fillLabel = new WindowComponent();
-        wallsMenuPanel.add(fillLabel);
-
-        fillLabel = new WallComponent();
-        wallsMenuPanel.add(fillLabel);
-
-        fillLabel = new WallComponent();
-        wallsMenuPanel.add(fillLabel);
-
-        fillLabel = new WallComponent();
-        wallsMenuPanel.add(fillLabel);
+        wallsMenuPanel.add(wallFactory.getComponent("WALLHALF"));
+        wallsMenuPanel.add(wallFactory.getComponent("WALL1H"));
+        wallsMenuPanel.add(wallFactory.getComponent("WALL1V"));
+        wallsMenuPanel.add(wallFactory.getComponent("WALL2H"));
+        wallsMenuPanel.add(wallFactory.getComponent("WALL3H"));
+        wallsMenuPanel.add(wallFactory.getComponent("WALL2V"));
+        wallsMenuPanel.add(wallFactory.getComponent("WALL3V"));
         
         add(wallsMenuPanel, "WALLS");
         
@@ -383,7 +401,7 @@ public class MenuPane extends JPanel{
                 backButtonActionPerformed(evt);
             }
         });
-
+        
         add(elevatorMenuPanel, "ELEVATORS");
 
       //Creates the doorsMenuPanel that will hold door components
@@ -397,6 +415,15 @@ public class MenuPane extends JPanel{
             }
         });
 
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFDOL"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFDOR"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFLOL"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFLOR"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFROL"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFROR"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFUOL"));
+        doorsMenuPanel.add(doorFactory.getComponent("DOORFUOR"));
+        
         add(doorsMenuPanel, "DOORS");
 
       //Creates the flooringMenuPanel that will hold flooring components
@@ -423,6 +450,11 @@ public class MenuPane extends JPanel{
             }
         });
         
+        windowsMenuPanel.add(windowFactory.getComponent("WINDOW2H"));
+        windowsMenuPanel.add(windowFactory.getComponent("WINDOW3H"));
+        windowsMenuPanel.add(windowFactory.getComponent("WINDOW2V"));
+        windowsMenuPanel.add(windowFactory.getComponent("WINDOW3V"));
+        
         add(windowsMenuPanel, "WINDOWS");
 
       //Creates the livingRoomMenuPanel that will hold living room components
@@ -435,7 +467,7 @@ public class MenuPane extends JPanel{
                 backButtonActionPerformed(evt);
             }
         });
-        
+
         add(livingRoomMenuPanel, "LIVINGROOM");
 
       //Creates the dinningRoomMenuPanel that will hold dinning room components
@@ -550,37 +582,7 @@ public class MenuPane extends JPanel{
 					innerPanel.setInMenuPane(false);
 				}	
 			}               
-	    });
-        
-//        addMouseListener(new MouseAdapter(){
-//            @Override
-//          public void mousePressed(MouseEvent evt){
-//          	try{
-//          		currentComponent = (FloorComponent)evt.getSource();
-//          		type = currentComponent.getComponentType();
-//        	    newComponent = factory.getComponent(type);
-//        	    componentSet = true;
-//          	}
-//          	catch(Exception notC){}
-//          }
-//            	
-//          //-------------------------------------------------------------------------------------------------------------   
-//            
-//            @Override
-//            public void mouseExited(MouseEvent evt){
-//            	try{
-//            		currentComponent = (FloorComponent)evt.getSource();
-//            		type = currentComponent.getComponentType();
-//        	    	newComponent = factory.getComponent(type);
-//        	    	tabbedPane.mainLayeredPanel.addToGlassPane(newComponent);
-//        	    	componentSet = true;
-//            	}
-//            	catch(Exception notC){}
-//            }
-//            
-//            });
-//          //------------------------------------------------------------------------------------------------------------- 
-        
+	    });      
     }
     
   //-------------------------------------------------------------------------------------------------------------     
